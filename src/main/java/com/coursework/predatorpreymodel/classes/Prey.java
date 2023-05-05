@@ -1,7 +1,10 @@
-public class Predator extends Species {
+package com.coursework.predatorpreymodel.classes;
+
+import com.classes.Species;
+
+public class Prey extends Species {
     @Override
     public  void move() {
-
 
     }
 
@@ -11,7 +14,7 @@ public class Predator extends Species {
 
         if (this.pos == this.target) {
             if (this.typeOfTarget == 0) {
-                this.eatPrey();
+                this.eatGrass();
             } else {
                 this.createOffspring();
             }
@@ -23,8 +26,7 @@ public class Predator extends Species {
 
     }
 
-    public void eatPrey() {
+    public void eatGrass() {
 
     }
-
 }

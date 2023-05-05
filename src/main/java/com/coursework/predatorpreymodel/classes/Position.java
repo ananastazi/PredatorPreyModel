@@ -1,3 +1,5 @@
+package com.coursework.predatorpreymodel.classes;
+
 public class Position {
     private Integer x, y;
 

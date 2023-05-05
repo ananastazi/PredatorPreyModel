@@ -1,4 +1,6 @@
-import javafx.util.Pair;
+package com.coursework.predatorpreymodel.classes;
+
+import com.classes.Position;
 
 public abstract class Species {
     protected Integer id;
