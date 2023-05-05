@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 public abstract class Species {
     protected Integer id;
     protected Position pos;
