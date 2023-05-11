@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3efa7cac-977f-437c-8ef8-d951041ee5a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/stylesheets/root.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/hello-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/textfonts.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/stylesheets/textfonts.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fonts/Karma Future.otf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fonts/Karma-Future.otf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fonts/Karma Suture.otf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fonts/Karma-Suture.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/stylesheets/HomeScreen.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/stylesheets/HomeScreen.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/stylesheets/root.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/stylesheets/root.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

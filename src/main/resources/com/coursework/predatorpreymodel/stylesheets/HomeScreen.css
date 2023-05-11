@@ -1,10 +1,11 @@
 @font-face {
-    src: url('../../../../fonts/Filepile.otf');
+    font-family: 'Karma Future';
+    src: url('../../../../fonts/Karma-Future.otf');
 }
 
 .predator-vs-prey {
-    -fx-font-family: "Filepile";
-    -fx-font-size: 85px;
+    -fx-font-family: "Karma Future";
+    -fx-font-size: 110px;
 }
 
 .home-buttons {
