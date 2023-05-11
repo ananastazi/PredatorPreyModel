@@ -5,22 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3efa7cac-977f-437c-8ef8-d951041ee5a8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/stylesheets/root.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/classes/Cell.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/classes/Emulation.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/classes/Grass.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/classes/Position.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/classes/Predator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/classes/Prey.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/classes/Species.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Emulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Emulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Grass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Grass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Predator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Predator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Prey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Prey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Species.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Species.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/textfonts.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/stylesheets/textfonts.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fonts/Karma Future.otf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fonts/Karma-Future.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/fonts/Karma Suture.otf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/fonts/Karma-Suture.otf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +58,7 @@
       <recent name="C:\Users\Dania\source\repos\University\CourseWork\PredatorPreyModel\src\main\java\com\coursework\predatorpreymodel" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dania\source\repos\University\CourseWork\PredatorPreyModel\src\main\resources\com\coursework\predatorpreymodel\stylesheets" />
       <recent name="D:\Енестейшен\Навчання\Універ\2 курс\2 сем\Курсач\PredatorPreyModel\PredatorPreyModel\src\main\resources\fonts" />
       <recent name="D:\Енестейшен\Навчання\Універ\2 курс\2 сем\Курсач\PredatorPreyModel\PredatorPreyModel\src\main\resources\media" />
       <recent name="D:\Енестейшен\Навчання\Універ\2 курс\2 сем\Курсач\PredatorPreyModel\PredatorPreyModel\src\main\resources\com\coursework\predatorpreymodel" />

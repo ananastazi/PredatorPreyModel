@@ -1,0 +1,17 @@
+@font-face {
+    src: url('../../../../fonts/Filepile.otf');
+}
+
+.predator-vs-prey {
+    -fx-font-family: "Filepile";
+    -fx-font-size: 85px;
+}
+
+.home-buttons {
+    -fx-pref-width: 260px;
+    -fx-padding: 10 0 10 0;
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+
+    -fx-font-size: 47px;
+    -fx-text-align: center;
+}

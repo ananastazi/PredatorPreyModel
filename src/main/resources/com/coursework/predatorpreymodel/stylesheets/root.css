@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'Karma Future';
+    src: url('../../../../fonts/Karma-Future.otf');
+}
+
+.root {
+    -fx-font-family: 'Karma Future';
+}
