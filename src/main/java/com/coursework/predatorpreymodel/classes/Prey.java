@@ -1,7 +1,5 @@
 package com.coursework.predatorpreymodel.classes;
 
-import com.classes.Species;
-
 public class Prey extends Species {
     @Override
     public  void move() {

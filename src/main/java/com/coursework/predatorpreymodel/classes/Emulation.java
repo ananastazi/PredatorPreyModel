@@ -1,25 +1,21 @@
 package com.coursework.predatorpreymodel.classes;
 
-import com.classes.Cell;
-import com.classes.Grass;
-import com.classes.Species;
-
 import java.util.List;
 
 public class Emulation {
-    private List<List<com.classes.Cell>> playField;
-    private List<com.classes.Species> predators;
-    private List<com.classes.Species> preys;
-    private List<com.classes.Grass> grass;
+    private List<List<Cell>> playField;
+    private List<Species> predators;
+    private List<Species> preys;
+    private List<Grass> grass;
 
-    public Emulation(List<List<com.classes.Cell>> playField, List<com.classes.Species> predators, List<com.classes.Species> preys, List<com.classes.Grass> grass) {
+    public Emulation(List<List<Cell>> playField, List<Species> predators, List<Species> preys, List<Grass> grass) {
         this.playField = playField;
         this.predators = predators;
         this.preys = preys;
         this.grass = grass;
     }
 
-    public List<List<com.classes.Cell>> getPlayField() {
+    public List<List<Cell>> getPlayField() {
         return playField;
     }
 
@@ -27,15 +23,15 @@ public class Emulation {
         this.playField = playField;
     }
 
-    public List<com.classes.Species> getPredators() {
+    public List<Species> getPredators() {
         return predators;
     }
 
-    public void setPredators(List<com.classes.Species> predators) {
+    public void setPredators(List<Species> predators) {
         this.predators = predators;
     }
 
-    public List<com.classes.Species> getPreys() {
+    public List<Species> getPreys() {
         return preys;
     }
 
@@ -43,7 +39,7 @@ public class Emulation {
         this.preys = preys;
     }
 
-    public List<com.classes.Grass> getGrass() {
+    public List<Grass> getGrass() {
         return grass;
     }
 

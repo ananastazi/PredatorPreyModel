@@ -1,7 +1,5 @@
 package com.coursework.predatorpreymodel.classes;
 
-import com.classes.Position;
-
 public abstract class Species {
     protected Integer id;
     protected Position pos;
