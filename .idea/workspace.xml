@@ -5,26 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3efa7cac-977f-437c-8ef8-d951041ee5a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/classes/Cell.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/classes/Emulation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/classes/Grass.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/classes/Position.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/classes/Predator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/classes/Prey.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/classes/Species.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Cell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Cell.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Emulation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Emulation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Grass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Grass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Position.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Position.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Predator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Predator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Prey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Prey.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Species.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/classes/Species.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/textfonts.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/textfonts.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +17,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -46,6 +33,7 @@
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2PMokzFZf5aEIeB1FCX6JOemOTC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -55,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/Dania/source/repos/University/CourseWork/PredatorPreyModel/src/main/java/com/coursework/predatorpreymodel",
+    "last_opened_file_path": "D:/Енестейшен/Программы/Scene Builder/SceneBuilder.exe",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -67,6 +55,9 @@
       <recent name="C:\Users\Dania\source\repos\University\CourseWork\PredatorPreyModel\src\main\java\com\coursework\predatorpreymodel" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Енестейшен\Навчання\Універ\2 курс\2 сем\Курсач\PredatorPreyModel\PredatorPreyModel\src\main\resources\fonts" />
+      <recent name="D:\Енестейшен\Навчання\Універ\2 курс\2 сем\Курсач\PredatorPreyModel\PredatorPreyModel\src\main\resources\media" />
+      <recent name="D:\Енестейшен\Навчання\Універ\2 курс\2 сем\Курсач\PredatorPreyModel\PredatorPreyModel\src\main\resources\com\coursework\predatorpreymodel" />
       <recent name="C:\Users\Dania\source\repos\University\CourseWork\PredatorPreyModel\src\main\java\com\coursework\predatorpreymodel\classes" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -75,7 +66,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="HelloApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="C:/Program Files/Java/jdk-20" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="com.coursework.predatorpreymodel.HelloApplication" />
       <module name="PredatorPreyModel" />
       <extension name="coverage">
@@ -88,11 +81,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.HelloApplication" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -104,5 +92,16 @@
       <updated>1683276460324</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

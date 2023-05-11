@@ -1,16 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
+<?import java.net.URL?>
+<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.coursework.predatorpreymodel.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<Scene xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coursework.predatorpreymodel.HelloController">
+    <stylesheets>
+       <URL value="@textfonts.css" />
+   </stylesheets>
+   <AnchorPane fx:id="scene1ID" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0">
+      <children>
+         <Pane prefHeight="768.0" prefWidth="1024.0" />
+         <ImageView fitHeight="800.0" fitWidth="1280.0">
+            <image>
+               <Image url="@../../../media/360_F_443693407_zQJa1GCqtY6C0OyrRjYGlMDi15XdTaW1.jpg" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="foxInGrassID" fitHeight="304.0" fitWidth="308.0" layoutY="14.0">
+            <image>
+               <Image url="@../../../media/Group%203.png" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="rabbitInGrassID" fitHeight="247.0" fitWidth="270.0" layoutX="999.0" layoutY="555.0">
+            <image>
+               <Image url="@../../../media/Group%202.png" />
+            </image>
+         </ImageView>
+         <Label fx:id="predatorVSpreyLabel" alignment="CENTER" layoutX="213.0" layoutY="258.0" styleClass="mainLabel" text="Predator vs Prey" textAlignment="CENTER">
+            <font>
+               <Font size="120.0" />
+            </font>
+         </Label>
+         <Button fx:id="playButton" layoutX="533.0" layoutY="460.0" mnemonicParsing="false" opacity="0.26" prefHeight="0.0" prefWidth="271.0">
+            <font>
+               <Font size="31.0" />
+            </font>
+         </Button>
+         <Label fx:id="playLabel" layoutX="626.0" layoutY="459.0" text="Play">
+            <font>
+               <Font size="47.0" />
+            </font>
+         </Label>
+         <Button fx:id="rulesButton" layoutX="533.0" layoutY="556.0" mnemonicParsing="false" opacity="0.26" prefHeight="0.0" prefWidth="271.0">
+            <font>
+               <Font size="31.0" />
+            </font>
+         </Button>
+         <Label fx:id="rulesLabel" layoutX="613.0" layoutY="555.0" text="Rules">
+            <font>
+               <Font size="47.0" />
+            </font>
+         </Label>
+         <Button fx:id="exitButton" layoutX="533.0" layoutY="648.0" mnemonicParsing="false" opacity="0.26" prefHeight="0.0" prefWidth="271.0">
+            <font>
+               <Font size="31.0" />
+            </font>
+         </Button>
+         <Label fx:id="exitLabel" layoutX="632.0" layoutY="647.0" text="Exit">
+            <font>
+               <Font size="47.0" />
+            </font>
+         </Label>
+      </children></AnchorPane>
+</Scene>
