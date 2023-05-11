@@ -27,11 +27,13 @@
                <Image url="@../../../media/Group 2.png" />
             </image>
          </ImageView>
-         <Label fx:id="predatorVSpreyLabel" styleClass="predator-vs-prey" layoutX="205.0" layoutY="280.0" text="Predator vs Prey" />
+         <Label fx:id="predatorVSpreyLabel" styleClass="predator-vs-prey" layoutX="205.0" layoutY="280.0">
+            Predator vs Prey
+         </Label>
          <Button fx:id="playButton" styleClass="home-buttons" layoutX="533.0" layoutY="460.0" mnemonicParsing="false">
             Play
          </Button>
-         <Button fx:id="rulesButton" styleClass="home-buttons" layoutX="533.0" layoutY="550.0" text="Rules" mnemonicParsing="false">
+         <Button fx:id="rulesButton" styleClass="home-buttons" layoutX="533.0" layoutY="550.0" mnemonicParsing="false">
             Rules
          </Button>
          <Button fx:id="exitButton" styleClass="home-buttons" layoutX="533.0" layoutY="640.0" mnemonicParsing="false">
