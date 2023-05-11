@@ -1,5 +1,6 @@
 module com.coursework.predatorpreymodel {
     requires javafx.controls;
+    requires javafx.swing;
     requires javafx.fxml;
     requires javafx.web;
 

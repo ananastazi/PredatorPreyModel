@@ -1,3 +1,5 @@
+package com.coursework.predatorpreymodel.classes;
+
 public class Cell {
     private Integer  typeOfCell; //if the cell is empty or filled with a groundcover
     private Integer  numberOfPredators; //number of predators in the cell

@@ -1,6 +1,9 @@
-public class Prey extends Species {
+package com.classes;
+
+public class Predator extends Species {
     @Override
     public  void move() {
+
 
     }
 
@@ -10,7 +13,7 @@ public class Prey extends Species {
 
         if (this.pos == this.target) {
             if (this.typeOfTarget == 0) {
-                this.eatGrass();
+                this.eatPrey();
             } else {
                 this.createOffspring();
             }
@@ -22,7 +25,8 @@ public class Prey extends Species {
 
     }
 
-    public void eatGrass() {
+    public void eatPrey() {
 
     }
+
 }
