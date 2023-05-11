@@ -20,11 +20,15 @@ public class HelloApplication extends Application {
 
         stage.setResizable(false);
 
+<<<<<<< Updated upstream
         stage.setTitle("Predator VS Prey!");
 =======
         Scene scene = new Scene(fxmlLoader.load(), 800, 1280);
         stage.setTitle("Hello!");
 >>>>>>> parent of c76b9c3 (fixed stage (window) size)
+=======
+        stage.setTitle("Predator VS Prey");
+>>>>>>> Stashed changes
         stage.setScene(scene);
         stage.show();
     }
