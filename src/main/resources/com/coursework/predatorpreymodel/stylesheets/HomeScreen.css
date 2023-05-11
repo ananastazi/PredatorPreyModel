@@ -6,6 +6,7 @@
 .predator-vs-prey {
     -fx-font-family: "Karma Future";
     -fx-font-size: 110px;
+    -fx-text-fill: black;
 }
 
 .home-buttons {
@@ -15,4 +16,5 @@
 
     -fx-font-size: 47px;
     -fx-text-align: center;
+    -fx-text-fill: black;
 }
