@@ -1,6 +1,16 @@
 package com.coursework.predatorpreymodel.classes;
 
-public class Cell {
+import java.util.List;
+
+public class PlayField {
+    public List<List<Cell>> playField;
+
+    public PlayField(List<List<Cell>> playField) {
+        this.playField = playField;
+    }
+}
+
+class Cell {
     private Integer  typeOfCell; //if the cell is empty or filled with a groundcover
     private Integer  numberOfPredators; //number of predators in the cell
     private Integer  numberOfPreys; //number of preys in the cell

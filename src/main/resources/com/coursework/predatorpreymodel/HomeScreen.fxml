@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.URL?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
 <!--<AnchorPane></AnchorPane>-->
-<AnchorPane fx:id="scene1ID" stylesheets="@stylesheets/HomeScreen.css" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coursework.predatorpreymodel.HelloController">
+
+<AnchorPane fx:id="scene1ID" prefHeight="800.0" prefWidth="1280.0" stylesheets="@stylesheets/HomeScreen.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coursework.predatorpreymodel.HomeScreen">
    <children>
          <Pane prefHeight="768.0" prefWidth="1024.0" />
          <ImageView fitHeight="800.0" fitWidth="1280.0">
@@ -27,16 +25,17 @@
                <Image url="@../../../media/Group 2.png" />
             </image>
          </ImageView>
-         <Label fx:id="predatorVSpreyLabel" styleClass="predator-vs-prey" layoutX="205.0" layoutY="280.0">
+         <Label fx:id="predatorVSpreyLabel" layoutX="205.0" layoutY="280.0" styleClass="predator-vs-prey">
             Predator vs Prey
          </Label>
-         <Button fx:id="playButton" styleClass="home-buttons" layoutX="533.0" layoutY="460.0" mnemonicParsing="false">
-            Play
-         </Button>
-         <Button fx:id="rulesButton" styleClass="home-buttons" layoutX="533.0" layoutY="550.0" mnemonicParsing="false">
+         <Button fx:id="playButton" layoutX="533.0" layoutY="460.0" mnemonicParsing="false" onAction="#Play" styleClass="home-buttons" text="Play">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></Button>
+         <Button fx:id="rulesButton" layoutX="533.0" layoutY="550.0" mnemonicParsing="false" styleClass="home-buttons">
             Rules
          </Button>
-         <Button fx:id="exitButton" styleClass="home-buttons" layoutX="533.0" layoutY="640.0" mnemonicParsing="false">
+         <Button fx:id="exitButton" layoutX="533.0" layoutY="640.0" mnemonicParsing="false" styleClass="home-buttons">
             Exit
          </Button>
       </children>

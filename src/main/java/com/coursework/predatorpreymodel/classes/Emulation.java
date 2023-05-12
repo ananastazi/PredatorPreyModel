@@ -3,24 +3,20 @@ package com.coursework.predatorpreymodel.classes;
 import java.util.List;
 
 public class Emulation {
-    private List<List<Cell>> playField;
+    private PlayField playField;
     private List<Species> predators;
     private List<Species> preys;
     private List<Grass> grass;
 
     public Emulation(List<List<Cell>> playField, List<Species> predators, List<Species> preys, List<Grass> grass) {
-        this.playField = playField;
+        this.playField = new PlayField(playField);
         this.predators = predators;
         this.preys = preys;
         this.grass = grass;
     }
 
-    public List<List<Cell>> getPlayField() {
+    public PlayField getPlayField() {
         return playField;
-    }
-
-    public void setPlayField(List<List<Cell>> playField) {
-        this.playField = playField;
     }
 
     public List<Species> getPredators() {
