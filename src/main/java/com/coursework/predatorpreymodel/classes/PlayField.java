@@ -5,20 +5,19 @@ import java.util.List;
 public class PlayField {
     public List<List<Cell>> playField;
 
-    public PlayField(List<List<Cell>> playField) {
-        this.playField = playField;
+    public PlayField(Integer rows, Integer cols) {
+//        this.playField = new List<List<Cell>>(rows);
     }
 }
 
 class Cell {
-    private Integer  typeOfCell; //if the cell is empty or filled with a groundcover
-    private Integer  numberOfPredators; //number of predators in the cell
-    private Integer  numberOfPreys; //number of preys in the cell
+    // 0 - empty; 1 - groundcover;
+    private Integer typeOfCell = 0; //if the cell is empty or filled with a groundcover
+    private Predator predator; // null - empty
+    private Prey prey; // null - empty
 
-    public Cell(Integer typeOfCell, Integer numberOfPredators, Integer numberOfPreys) {
+    public Cell(Integer typeOfCell) {
         this.typeOfCell = typeOfCell;
-        this.numberOfPredators = numberOfPredators;
-        this.numberOfPreys = numberOfPreys;
     }
 
     public Integer getTypeOfCell() {
@@ -29,19 +28,19 @@ class Cell {
         this.typeOfCell = typeOfCell;
     }
 
-    public Integer getNumberOfPredators() {
-        return numberOfPredators;
+    public void setPredator(Predator predator) {
+        this.predator = predator;
     }
 
-    public void setNumberOfPredators(Integer numberOfPredators) {
-        this.numberOfPredators = numberOfPredators;
+    public Predator getPredator() {
+        return predator;
     }
 
-    public Integer getNumberOfPreys() {
-        return numberOfPreys;
+    public void setPrey(Prey prey) {
+        this.prey = prey;
     }
 
-    public void setNumberOfPreys(Integer numberOfPreys) {
-        this.numberOfPreys = numberOfPreys;
+    public Prey getPrey() {
+        return prey;
     }
 }

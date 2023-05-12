@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="anchorPaneID" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@stylesheets/ParametersInput.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coursework.predatorpreymodel.ParametersInputSpecies">
+   <children>
+      <Label layoutX="302.0" layoutY="82.0" text="Your ecosystem start point " textFill="WHITE">
+         <font>
+            <Font size="56.0" />
+         </font>
+      </Label>
+      <Label layoutX="251.0" layoutY="552.0" text="Number of ecosystem life-tacts: " textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Text fill="WHITE" layoutX="444.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your parameters">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <Label layoutX="93.0" layoutY="288.0" text="Number of predators:" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="93.0" layoutY="342.0" text="Predators energy:" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="93.0" layoutY="402.0" text="Predators critical energy:" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="93.0" layoutY="457.0" text="Lifespan:" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <TextField fx:id="numberOfPredators" layoutX="410.0" layoutY="295.0" prefHeight="30.0" prefWidth="149.0" promptText="2" />
+      <TextField fx:id="predatorsEnergy" layoutX="361.0" layoutY="348.0" prefHeight="30.0" prefWidth="149.0" promptText="5" />
+      <TextField fx:id="predatorsCriticEnergy" layoutX="482.0" layoutY="409.0" prefHeight="30.0" prefWidth="149.0" promptText="2" />
+      <TextField fx:id="predatorsLifespan" layoutX="241.0" layoutY="464.0" prefHeight="30.0" prefWidth="149.0" promptText="6" />
+      <Label layoutX="720.0" layoutY="288.0" text="Number of preys:" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="720.0" layoutY="342.0" text="Preys energy:" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="720.0" layoutY="402.0" text="Preys critical energy:" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="720.0" layoutY="457.0" text="Lifespan:" textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <TextField fx:id="numberOfPreys" layoutX="964.0" layoutY="295.0" prefHeight="30.0" prefWidth="149.0" promptText="2" />
+      <TextField fx:id="preysEnergy" layoutX="922.0" layoutY="348.0" prefHeight="30.0" prefWidth="149.0" promptText="5" />
+      <TextField fx:id="preysCriticEnergy" layoutX="1039.0" layoutY="409.0" prefHeight="30.0" prefWidth="149.0" promptText="2" />
+      <TextField fx:id="preysLifespan" layoutX="864.0" layoutY="464.0" prefHeight="30.0" prefWidth="149.0" promptText="4" />
+      <TextField fx:id="lifeTacts" layoutX="718.0" layoutY="560.0" prefHeight="30.0" prefWidth="149.0" promptText="10" />
+      <ImageView fitHeight="289.0" fitWidth="162.0">
+         <image>
+            <Image url="@../../../media/fox2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="244.0" fitWidth="128.0" layoutX="1153.0" layoutY="23.0">
+         <image>
+            <Image url="@../../../media/rabbit2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="173.0" fitWidth="1288.0" layoutX="-7.0" layoutY="631.0" opacity="0.88">
+         <image>
+            <Image url="@../../../media/360_F_443693407_zQJa1GCqtY6C0OyrRjYGlMDi15XdTaW1%20–%20копія.jpg" />
+         </image>
+      </ImageView>
+      <Button fx:id="forwardButton" layoutX="650.0" layoutY="685.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="162.0" text="Forward">
+         <font>
+            <Font size="30.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Button fx:id="backButton" layoutX="470.0" layoutY="685.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="162.0" text="Back" >
+         <font>
+            <Font size="30.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>

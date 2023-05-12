@@ -9,7 +9,11 @@ public class Emulation {
     private List<Grass> grass;
 
     public Emulation(List<List<Cell>> playField, List<Species> predators, List<Species> preys, List<Grass> grass) {
-        this.playField = new PlayField(playField);
+//        EXAMPLE
+//        public Emulation(EmulationParameters emulationParameters) {
+//        this.predators = emulationParameters.predators;
+//        EXAMPLE
+//        this.playField = new PlayField();
         this.predators = predators;
         this.preys = preys;
         this.grass = grass;
