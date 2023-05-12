@@ -1,42 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
 <!--<AnchorPane></AnchorPane>-->
 
-<AnchorPane fx:id="scene1ID" prefHeight="800.0" prefWidth="1280.0" stylesheets="@stylesheets/HomeScreen.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coursework.predatorpreymodel.HomeScreen">
+<AnchorPane fx:id="scene1ID" prefHeight="800.0" prefWidth="1280.0" stylesheets="@stylesheets/HomeScreen.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coursework.predatorpreymodel.HomeScreen">
    <children>
          <Pane prefHeight="768.0" prefWidth="1024.0" />
-         <ImageView fitHeight="800.0" fitWidth="1280.0">
+         <ImageView fitHeight="802.0" fitWidth="1280.0">
             <image>
                <Image url="@../../../media/360_F_443693407_zQJa1GCqtY6C0OyrRjYGlMDi15XdTaW1.jpg" />
             </image>
          </ImageView>
-         <ImageView fx:id="foxInGrassID" fitHeight="304.0" fitWidth="308.0" layoutY="14.0">
+         <ImageView fx:id="foxInGrassID" fitHeight="275.0" fitWidth="279.0" layoutY="105.0">
             <image>
                <Image url="@../../../media/Group 3.png" />
             </image>
          </ImageView>
-         <ImageView fx:id="rabbitInGrassID" fitHeight="247.0" fitWidth="270.0" layoutX="999.0" layoutY="555.0">
+         <ImageView fx:id="rabbitInGrassID" fitHeight="237.0" fitWidth="260.0" layoutX="906.0" layoutY="565.0">
             <image>
                <Image url="@../../../media/Group 2.png" />
             </image>
          </ImageView>
-         <Label fx:id="predatorVSpreyLabel" layoutX="205.0" layoutY="280.0" styleClass="predator-vs-prey">
+         <Label fx:id="predatorVSpreyLabel" contentDisplay="CENTER" layoutX="411.0" layoutY="96.0" prefHeight="141.0" prefWidth="506.0" styleClass="predator-vs-prey" text="Predator">
             Predator vs Prey
          </Label>
-         <Button fx:id="playButton" layoutX="533.0" layoutY="460.0" mnemonicParsing="false" onAction="#Play" styleClass="home-buttons" text="Play">
+         <Button fx:id="playButton" layoutX="530.0" layoutY="453.0" mnemonicParsing="false" onAction="#Play" styleClass="home-buttons" text="Play">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor></Button>
-         <Button fx:id="rulesButton" layoutX="533.0" layoutY="550.0" mnemonicParsing="false" styleClass="home-buttons">
+         <Button fx:id="rulesButton" layoutX="530.0" layoutY="555.0" mnemonicParsing="false" prefHeight="79.0" styleClass="home-buttons" text="Rules">
             Rules
          </Button>
-         <Button fx:id="exitButton" layoutX="533.0" layoutY="640.0" mnemonicParsing="false" styleClass="home-buttons">
+         <Button fx:id="exitButton" layoutX="530.0" layoutY="658.0" mnemonicParsing="false" prefHeight="89.0" styleClass="home-buttons">
             Exit
          </Button>
+      <Label fx:id="predatorVSpreyLabel1" contentDisplay="CENTER" layoutX="597.0" layoutY="188.0" prefHeight="65.0" prefWidth="135.0" styleClass="predator-vs-prey" text="vs" />
+      <Label fx:id="predatorVSpreyLabel11" contentDisplay="CENTER" layoutX="536.0" layoutY="278.0" prefHeight="138.0" prefWidth="254.0" styleClass="predator-vs-prey" text="Prey" />
+      <ImageView fitHeight="74.0" fitWidth="74.0" layoutX="203.0" layoutY="670.0">
+         <image>
+            <Image url="@../../../media/mouse.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="164.0" fitWidth="200.0" layoutX="140.0" layoutY="638.0">
+         <image>
+            <Image url="@../../../media/grass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="227.0" fitWidth="184.0" layoutX="1024.0" layoutY="14.0" rotate="180.0">
+         <image>
+            <Image url="@../../../media/wolf.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="244.0" layoutX="1005.0" layoutY="5.0" rotate="180.0">
+         <image>
+            <Image url="@../../../media/grass.png" />
+         </image>
+      </ImageView>
       </children>
 </AnchorPane>

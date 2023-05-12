@@ -1,0 +1,7 @@
+@font-face {
+    src: url('../../../../fonts/Karma-Suture.otf');
+}
+
+* {
+    -fx-font-family: 'Karma Suture';
+}
