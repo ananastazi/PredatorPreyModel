@@ -1,20 +1,39 @@
 package com.coursework.predatorpreymodel.classes;
 
 public class EmulationParameters {
-    private Integer fieldLength, fieldWidth;
-    private Integer lifeTacts;
-    private Integer numberOfPredators, numberOfPreys;
+    private Integer fieldLength = 10, fieldWidth = 10;
+    private Integer lifeTacts = 10;
+    private Integer numberOfPredators = 2, numberOfPreys = 2;
     private Integer numberOfGrass;
     private Integer predatorsEnergy, predatorsCriticalEnergy, preysEnergy, preysCriticalEnergy;
     private Integer predatorsLifespan, preysLifespan;
 
-    public EmulationParameters(Integer fieldLength, Integer fieldWidth, Integer lifeTacts, Integer numberOfPredators, Integer numberOfPreys, Integer numberOfGrass, Integer predatorsEnergy, Integer predatorsCriticalEnergy, Integer preysEnergy, Integer preysCriticalEnergy, Integer predatorsLifespan, Integer preysLifespan) {
+    public EmulationParameters(EmulationParameters emulationParameters, Integer fieldLength, Integer fieldWidth, Integer lifeTacts) {
+        if (emulationParameters != null) {
+            this.numberOfPredators = emulationParameters.numberOfPredators;
+            this.numberOfPreys = emulationParameters.numberOfPreys;
+            this.predatorsEnergy = emulationParameters.predatorsEnergy;
+            this.predatorsCriticalEnergy = emulationParameters.predatorsCriticalEnergy;
+            this.preysEnergy = emulationParameters.preysEnergy;
+            this.preysCriticalEnergy = emulationParameters.preysCriticalEnergy;
+            this.predatorsLifespan = emulationParameters.predatorsLifespan;
+            this.preysLifespan = emulationParameters.preysLifespan;
+        }
+
         this.fieldLength = fieldLength;
         this.fieldWidth = fieldWidth;
         this.lifeTacts = lifeTacts;
+        this.numberOfGrass = fieldLength * fieldWidth;
+    }
+    public EmulationParameters(EmulationParameters emulationParameters, Integer numberOfPredators, Integer numberOfPreys, Integer predatorsEnergy, Integer predatorsCriticalEnergy, Integer preysEnergy, Integer preysCriticalEnergy, Integer predatorsLifespan, Integer preysLifespan) {
+        if (emulationParameters != null) {
+            this.fieldLength = emulationParameters.fieldLength;
+            this.fieldWidth = emulationParameters.fieldWidth;
+            this.lifeTacts = emulationParameters.lifeTacts;
+            this.numberOfGrass = emulationParameters.numberOfGrass;
+        }
         this.numberOfPredators = numberOfPredators;
         this.numberOfPreys = numberOfPreys;
-        this.numberOfGrass = numberOfGrass;
         this.predatorsEnergy = predatorsEnergy;
         this.predatorsCriticalEnergy = predatorsCriticalEnergy;
         this.preysEnergy = preysEnergy;
