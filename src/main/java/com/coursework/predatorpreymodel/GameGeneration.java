@@ -1,5 +1,5 @@
 package com.coursework.predatorpreymodel;
 
-public class GameController {
+public class GameGeneration {
 
 }
