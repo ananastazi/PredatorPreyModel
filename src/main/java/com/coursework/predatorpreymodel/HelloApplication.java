@@ -14,8 +14,6 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("HomeScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 800);
         scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm());
-        Text t = new Text();
-        t.setText("This is a text sample");
 
         stage.setResizable(false);
 
