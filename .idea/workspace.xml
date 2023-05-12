@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3efa7cac-977f-437c-8ef8-d951041ee5a8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/ParametersInput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/Parameters input.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/media/fox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/media/rabbit.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/coursework/predatorpreymodel/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/coursework/predatorpreymodel/hello-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,5 +111,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PredatorPreyModel$HelloApplication.ic" NAME="HelloApplication Coverage Results" MODIFIED="1683882278948" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.coursework.predatorpreymodel.*</FILTER>
+    </SUITE>
   </component>
 </project>
