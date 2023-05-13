@@ -24,7 +24,7 @@ public class Prey extends Species {
     }
 
     @Override
-    public void searchTarget(Integer targetType) {
+    public void searchTarget() {
 
     }
 

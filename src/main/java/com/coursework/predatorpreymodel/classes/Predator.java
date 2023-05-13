@@ -28,7 +28,7 @@ public class Predator extends Species {
     }
 
     @Override
-    public void searchTarget(Integer targetType) {
+    public void searchTarget() {
         // local map/matrix filled with -1;
         ArrayList<ArrayList<Integer>> localMatrix = new ArrayList<>();
         PlayField playField = PlayField.getInstance();
@@ -44,7 +44,7 @@ public class Predator extends Species {
         localMatrix.get(this.pos.getX()).set(this.pos.getY(), 0);
 
 
-
+        //  create queue with poss, find target, find workaround
         // check target
     }
 

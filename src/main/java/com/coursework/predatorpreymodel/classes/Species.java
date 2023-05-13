@@ -131,14 +131,14 @@ public abstract class Species {
         else {
             this.typeOfTarget = 2;
         }
-        this.searchTarget(typeOfTarget);
+        this.searchTarget();
     }
 
     public abstract void move();
 
     public abstract void doStep();
 
-    public abstract void searchTarget(Integer targetType);
+    public abstract void searchTarget();
 
     public void createOffspring() {
 
