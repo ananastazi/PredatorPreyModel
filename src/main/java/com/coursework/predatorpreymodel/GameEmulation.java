@@ -31,6 +31,9 @@ public class GameEmulation {
         gridPane.add(new Button("Button"), 2, 2);
         gridPane.add(new Button("Button"), 0, 0);
         gridPane.add(new Button("Button"), 0, 1);
+        // IMPORTANT
+        gridPane.getStylesheets().add(getClass().getResource("stylesheets/GridPane.css").toExternalForm());
+
     }
 
     private void UpdateField() {
