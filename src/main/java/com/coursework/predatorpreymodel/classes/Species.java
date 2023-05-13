@@ -1,8 +1,11 @@
 package com.coursework.predatorpreymodel.classes;
 
+import javafx.geometry.Pos;
+
 public abstract class Species {
     protected Integer id;
     protected Position pos;
+    // IS IT POSITION OR POSITION + ID ?????????????
     protected Position target;
     protected Integer typeOfTarget;
     protected Integer energy;
@@ -11,8 +14,16 @@ public abstract class Species {
     protected Integer lifetimeTacts;
     protected Integer state;
     protected Integer currentAge;
-    protected Integer  maxEnergy;
+    protected Integer maxEnergy;
     protected Boolean causeOfdeath; // cause of death: 0 - from age, 1 - from hunger
+
+    public Species(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts) {
+        this.id = id;
+        this.pos = pos;
+        this.energy = energy;
+        this.criticalEnergy = criticalEnergy;
+        this.lifetimeTacts = lifetimeTacts;
+    }
 
     public Integer getId() {
         return id;

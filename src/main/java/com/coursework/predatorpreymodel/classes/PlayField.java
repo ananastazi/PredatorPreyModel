@@ -3,25 +3,36 @@ package com.coursework.predatorpreymodel.classes;
 import java.util.ArrayList;
 import java.util.List;
 
-// MAKE IT SINGLETON
+// SINGLETON CLASS
 public class PlayField {
-    public List<List<Cell>> playField;
+    private static PlayField single_instance = null; // Static variable reference of single_instance of type Singleton
+    public List<List<Cell>> field;
 
-    public PlayField(Integer rows, Integer cols) {
-        this.playField = new ArrayList<>();
-        for (int i = 0; i < rows; i++) {
+    private PlayField() { }
+
+    // Static method to create instance of Singleton class
+    public static synchronized PlayField getInstance()
+    {
+        if (single_instance == null)
+            single_instance = new PlayField();
+        return single_instance;
+    }
+
+    public void setPlayField(Integer width, Integer length) {
+        this.field = new ArrayList<>();
+        for (int i = 0; i < width; i++) {
             List<Cell> innerList = new ArrayList<>();
-            for (int j = 0; j < cols; j++) {
+            for (int j = 0; j < length; j++) {
                 innerList.add(new Cell());
             }
-            this.playField.add(innerList);
+            this.field.add(innerList);
         }
     }
 }
 
 class Cell {
     // 0 - empty; 1 - groundcover;
-    private Integer typeOfCell = 0; //if the cell is empty or filled with a groundcover
+    private Integer typeOfCell = 0; // if the cell is empty or filled with a groundcover
 
 //    private Species predator; // null - empty
     private Predator predator; // null - empty

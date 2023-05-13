@@ -70,7 +70,7 @@ public class ParametersInputSpecies {
 
     private String UpdateEmulationParameters() {
         /*
-numberOfPredators;
+numberOfPredatorsValue;
 predatorsEnergy;
 predatorsCriticEnergy
 predatorsLifespan;

@@ -5,11 +5,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class ParametersInputField {
+    public TextField lifeTacts;
+    public TextField fieldHeight;
+    public TextField fieldWidth;
     private Stage stage;
     private Scene scene;
 
@@ -45,7 +49,24 @@ public class ParametersInputField {
         stage.show();
     }
 
-    private void UpdateEmulationParameters() {
+    private String UpdateEmulationParameters() {
         emulationParameters = new EmulationParameters(emulationParameters, 0, 0, 0);
+        return "";
     }
+
+    private String CheckInput(String strNum, Integer min, Integer max) {
+        if (strNum == null) {
+            return "";
+        }
+        Integer d;
+        try {
+            d = Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return " must be a number in range between " + min + " and " + max;
+        }
+        if (d < min || d > max)
+            return " must be in range between " + min + " and " + max;
+        return "";
+    }
+
 }

@@ -4,16 +4,21 @@ import javafx.util.Pair;
 import java.util.Random;
 
 public class Grass {
-    protected Pair<Integer, Integer> pos;
+    protected Position pos;
     protected Integer id;
-    protected Boolean state;
+    protected Boolean state = true;
     protected Integer deathtimeTacts;
 
-    public Pair<Integer, Integer> getPos() {
+    public Grass(Position pos, Integer id) {
+        this.pos = pos;
+        this.id = id;
+    }
+
+    public Position getPos() {
         return pos;
     }
 
-    public void setPos(Pair<Integer, Integer> pos) {
+    public void setPos(Position pos) {
         this.pos = pos;
     }
 

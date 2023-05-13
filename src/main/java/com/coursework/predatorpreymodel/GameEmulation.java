@@ -8,6 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+
+import static java.nio.file.Files.getOwner;
 
 import static java.lang.Math.min;
 

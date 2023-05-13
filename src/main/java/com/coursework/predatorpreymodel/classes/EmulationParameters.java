@@ -1,14 +1,14 @@
 package com.coursework.predatorpreymodel.classes;
 
 public class EmulationParameters {
-    private Integer fieldLength = 10, fieldWidth = 10;
+    private Integer fieldWidth = 10, fieldHeight = 10;
     private Integer lifeTacts = 10;
     private Integer numberOfPredators = 2, numberOfPreys = 2;
     private Integer numberOfGrass;
     private Integer predatorsEnergy, predatorsCriticalEnergy, preysEnergy, preysCriticalEnergy;
     private Integer predatorsLifespan, preysLifespan;
 
-    public EmulationParameters(EmulationParameters emulationParameters, Integer fieldLength, Integer fieldWidth, Integer lifeTacts) {
+    public EmulationParameters(EmulationParameters emulationParameters, Integer fieldWidth, Integer fieldHeight, Integer lifeTacts) {
         if (emulationParameters != null) {
             this.numberOfPredators = emulationParameters.numberOfPredators;
             this.numberOfPreys = emulationParameters.numberOfPreys;
@@ -20,15 +20,15 @@ public class EmulationParameters {
             this.preysLifespan = emulationParameters.preysLifespan;
         }
 
-        this.fieldLength = fieldLength;
         this.fieldWidth = fieldWidth;
+        this.fieldHeight = fieldHeight;
         this.lifeTacts = lifeTacts;
-        this.numberOfGrass = fieldLength * fieldWidth;
+        this.numberOfGrass = fieldHeight * fieldWidth;
     }
     public EmulationParameters(EmulationParameters emulationParameters, Integer numberOfPredators, Integer numberOfPreys, Integer predatorsEnergy, Integer predatorsCriticalEnergy, Integer preysEnergy, Integer preysCriticalEnergy, Integer predatorsLifespan, Integer preysLifespan) {
         if (emulationParameters != null) {
-            this.fieldLength = emulationParameters.fieldLength;
             this.fieldWidth = emulationParameters.fieldWidth;
+            this.fieldHeight = emulationParameters.fieldHeight;
             this.lifeTacts = emulationParameters.lifeTacts;
             this.numberOfGrass = emulationParameters.numberOfGrass;
         }
@@ -42,8 +42,8 @@ public class EmulationParameters {
         this.preysLifespan = preysLifespan;
     }
 
-    public Integer getFieldLength() {
-        return fieldLength;
+    public Integer getFieldHeight() {
+        return fieldHeight;
     }
 
     public Integer getFieldWidth() {
