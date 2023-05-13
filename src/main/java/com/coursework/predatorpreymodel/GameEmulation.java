@@ -25,9 +25,6 @@ public class GameEmulation {
     public void GenerateEmulationSystem() {
         this.emulation = new Emulation(emulationParameters);
         gridPane = new GridPane();
-    }
-
-    public void RunEmulation() {
         gridPane.add(new Button("Button"), 1, 1);
         gridPane.add(new Button("Button"), 2, 2);
         gridPane.add(new Button("Button"), 0, 0);
@@ -35,6 +32,11 @@ public class GameEmulation {
         // IMPORTANT
         gridPane.getStylesheets().add(getClass().getResource("stylesheets/GridPane.css").toExternalForm());
 
+    }
+
+    public void RunEmulation() {
+
+        // emulation controller
     }
 
     private void UpdateField() {
