@@ -23,7 +23,6 @@ public class ParametersInputSpecies {
     public TextField preysEnergy;
     public TextField preysCriticEnergy;
     public TextField preysLifespan;
-    public TextField lifeTacts;
 
     private Scene scene;
     private Stage stage;
@@ -48,38 +47,57 @@ public class ParametersInputSpecies {
     }
 
     public void Start(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ParametersInputSpecies.fxml"));
+        String errorName = UpdateEmulationParameters();
+        if (errorName != "") {
+            System.out.println(errorName);
+            return;
+        }
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameEmulation.fxml"));
         scene = new Scene(fxmlLoader.load(), 1280, 800);
         scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm());
 
-        UpdateEmulationParameters();
-
-        ParametersInputSpecies parametersInputSpecies = fxmlLoader.getController();
-        parametersInputSpecies.setEmulationParameters(emulationParameters);
+        GameEmulation gameEmulation = fxmlLoader.getController();
+        gameEmulation.setEmulationParameters(emulationParameters);
+        gameEmulation.GenerateEmulationSystem();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+
+        gameEmulation.StartEmulation();
     }
 
-    /*public void Start(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ParametersInputSpecies.fxml"));
-
-        UpdateEmulationParameters();
-
-        ParametersInputSpecies parametersInputSpecies = fxmlLoader.getController();
-        parametersInputSpecies.setEmulationParameters(emulationParameters);
-
-        fxmlLoader = new FXMLLoader(getClass().getResource("GameEmulation.fxml"));
-        scene = new Scene(fxmlLoader.load(), 1280, 800);
-        scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm());
-
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
-    }*/
-
-    private void UpdateEmulationParameters() {
+    private String UpdateEmulationParameters() {
+        /*
+numberOfPredators;
+predatorsEnergy;
+predatorsCriticEnergy
+predatorsLifespan;
+numberOfPreys;
+preysEnergy;
+preysCriticEnergy;
+preysLifespan;
+*/
+        String result = CheckInput(numberOfPredators.getText(), 0, 100);
+        if (result != "")
+            return numberOfPredators + result;
         emulationParameters = new EmulationParameters(emulationParameters, 0, 0, 0, 0, 0, 0 ,0 ,0);
+        return "";
+    }
+
+    private String CheckInput(String strNum, Integer min, Integer max) {
+        if (strNum == null) {
+            return "";
+        }
+        Integer d;
+        try {
+            d = Integer.parseInt(strNum);
+        } catch (NumberFormatException nfe) {
+            return " must be a number in range between " + min + " and " + max;
+        }
+        if (d < min || d > max)
+            return " must be in range between " + min + " and " + max;
+        return "";
     }
 }

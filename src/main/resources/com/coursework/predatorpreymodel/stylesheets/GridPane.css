@@ -1,7 +1,7 @@
-.gridPane {
-    -fx-background-image: url('../../../../ground.jpg');
+.gridPane Pane  {
+    -fx-background-image: url('../../../../media/grass.png');
 }
 
 .pane {
-    -fx-background-image: url('../../../../ground.jpg');
+    -fx-background-image: url('../../../../media/ground.jpg');
 }
