@@ -67,8 +67,8 @@ public class Emulation {
         UniquePositionGenerator uniquePositionGenerator = new UniquePositionGenerator(emulationParameters.getFieldHeight(), emulationParameters.getFieldWidth());
         Position pos;
         for (int i = 0; i < emulationParameters.getNumberOfPredators(); ++i) {
-                pos = uniquePositionGenerator.GetPos();
-                predators.add(new Predator(i, pos, emulationParameters.getPredatorsEnergy(), emulationParameters.getPredatorsCriticalEnergy(), emulationParameters.getPredatorsLifespan(), emulationParameters.getPredatorsSearchRadius()));
+            pos = uniquePositionGenerator.GetPos();
+            predators.add(new Predator(i, pos, emulationParameters.getPredatorsEnergy(), emulationParameters.getPredatorsCriticalEnergy(), emulationParameters.getPredatorsLifespan(), emulationParameters.getPredatorsSearchRadius()));
         }
         for (int i = 0; i < emulationParameters.getNumberOfPreys(); ++i) {
             pos = uniquePositionGenerator.GetPos();

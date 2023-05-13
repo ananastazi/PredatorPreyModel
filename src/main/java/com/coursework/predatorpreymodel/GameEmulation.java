@@ -1,16 +1,12 @@
 package com.coursework.predatorpreymodel;
 
-import com.coursework.predatorpreymodel.classes.Emulation;
-import com.coursework.predatorpreymodel.classes.EmulationParameters;
+import com.coursework.predatorpreymodel.classes.*;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-
-import static java.nio.file.Files.getOwner;
 
 import static java.lang.Math.min;
 
@@ -26,11 +22,20 @@ public class GameEmulation {
         this.emulationParameters = emulationParameters;
     }
 
-    public void GenerateEmulationSystem(Stage stage) {
+    public void GenerateEmulationSystem() {
         this.emulation = new Emulation(emulationParameters);
 
-        gridPane = new GridPane();
+    }
 
+    public void RunEmulation() {
+
+        // operating emulation tacts/generations here
+    }
+
+    public void GenerateScene(Stage stage) {
+        this.stage = stage; // PROBABLY NOT NECESSARY
+        gridPane = new GridPane();
+// MUST BE CONNECTED TO EmulationParameters instance
         Integer width = 10;
         Integer height = 10;
         double gridPaneSize = min(900.0 / width, 800.0 / height);
@@ -46,8 +51,6 @@ public class GameEmulation {
             gridPane.getRowConstraints().add(rowConst);
         }
 
-        //gridPane.setMaxWidth(gridPaneSize * width);
-        //gridPane.setMaxHeight(gridPaneSize * height);
         gridPane.setLayoutY((800 - height * gridPaneSize) / 2);
         gridPane.setStyle("-fx-grid-lines-visible: true; -fx-border-color: white; -fx-background-color: black;");
 
@@ -59,12 +62,29 @@ public class GameEmulation {
         stage.show();
     }
 
-    public void RunEmulation() {
+    private void UpdateScene() {
+        PlayField playField = emulation.getPlayField();
+        for (int i = 0; i < playField.getHeight(); ++i) {
+            for (int j = 0; j < playField.getWidth(); ++j) {
+                Cell cell = playField.getField().get(i).get(j);
+                switch (cell.getTypeOfCell()) {
+                    case 0:
+                        // set ground Image to pane
+                        break;
+                    case 1:
+                        // set grass Image to pane
+                        break;
+                    default:
+                        break;
+                }
 
-        // emulation controller
-    }
-
-    private void UpdateField() {
-
+                if (cell.getIndividual().getClass() == Predator.class) {
+                    // set image inside the pane
+                }
+                if (cell.getIndividual().getClass() == Prey.class) {
+                    // set image inside the pane
+                }
+            }
+        }
     }
 }

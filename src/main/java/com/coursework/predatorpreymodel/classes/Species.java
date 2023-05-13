@@ -15,7 +15,7 @@ public abstract class Species {
     protected Integer state;
     protected Integer currentAge;
     protected Integer maxEnergy;
-    protected Boolean causeOfdeath; // cause of death: 0 - from age, 1 - from hunger
+    protected Integer causeOfdeath; // cause of death: 0 - from age, 1 - from hunger, 2 - eaten
     protected Integer searchRadius;
 
     public Species(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts, Integer searchRadius) {
@@ -117,10 +117,10 @@ public abstract class Species {
 
     public void act() {
         if (this.currentAge >= this.lifetimeTacts) {
-            this.dieFrom(false);
+            this.dieFrom(0);
         }
         else if (this.energy < this.criticalEnergy) {
-            this.dieFrom(true);
+            this.dieFrom(1);
         }
         else if (this.energy < this.amountOfEnergyForReproduction) {
             this.typeOfTarget = 0;
@@ -144,12 +144,8 @@ public abstract class Species {
 
     }
 
-    public void dieFrom(boolean death) {
-        this.causeOfdeath = death;
+    public void dieFrom(Integer causeOfdeath) {
+        this.causeOfdeath = causeOfdeath;
         this.state = 0;
-        this.currentAge = 0;
-        this.energy = 0;
-        this.pos.setX(0);
-        this.pos.setY(0);
     }
 }

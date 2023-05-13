@@ -53,18 +53,13 @@ public class ParametersInputSpecies {
             return;
         }
 
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GameEmulation.fxml"));
-        scene = new Scene(fxmlLoader.load(), 1280, 800);
-        scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm());
-
-        GameEmulation gameEmulation = fxmlLoader.getController();
+        GameEmulation gameEmulation = new GameEmulation();
         gameEmulation.setEmulationParameters(emulationParameters);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setScene(scene);
-        stage.show();
 
-        gameEmulation.GenerateEmulationSystem(stage);
+        gameEmulation.GenerateEmulationSystem();
+        gameEmulation.GenerateScene(stage);
         gameEmulation.RunEmulation();
     }
 
@@ -79,10 +74,36 @@ preysEnergy;
 preysCriticEnergy;
 preysLifespan;
 */
-        String result = CheckInput(numberOfPredators.getText(), 0, 100);
-        if (result != "")
-            return numberOfPredators.getText() + result;
+
         emulationParameters = new EmulationParameters(emulationParameters, 0, 0, 0, 0, 0, 0 ,0 ,0);
+        return "";
+    }
+
+    private String checkInputs() {
+        String errorName;
+        /*
+numberOfPredatorsValue;
+predatorsEnergy;
+predatorsCriticEnergy
+predatorsLifespan;
+numberOfPreys;
+preysEnergy;
+preysCriticEnergy;
+preysLifespan;
+*/
+        errorName = CheckInput(numberOfPredators.getText(), 0, 100);
+        if (errorName != "")
+            return "Textfield numberOfPredators.getText()" + errorName;
+        errorName = CheckInput(numberOfPredators.getText(), 0, 100);
+        if (errorName != "")
+            return numberOfPredators.getText() + errorName;
+        errorName = CheckInput(numberOfPredators.getText(), 0, 100);
+        if (errorName != "")
+            return numberOfPredators.getText() + errorName;
+        errorName = CheckInput(numberOfPredators.getText(), 0, 100);
+        if (errorName != "")
+            return numberOfPredators.getText() + errorName;
+
         return "";
     }
 
