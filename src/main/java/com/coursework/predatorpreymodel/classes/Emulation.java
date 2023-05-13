@@ -8,10 +8,10 @@ public class Emulation {
     private List<Predator> predators;
     private List<Prey> preys;
     private List<Grass> grass;
-
     private EmulationParameters emulationParameters;
 
     public Emulation(EmulationParameters emulationParameters) {
+        this.emulationParameters = emulationParameters;
         this.playField = new PlayField(emulationParameters.getFieldLength(), emulationParameters.getFieldWidth());
         this.predators = new ArrayList<>(emulationParameters.getNumberOfPredators());
         this.preys = new ArrayList<>(emulationParameters.getNumberOfPreys());

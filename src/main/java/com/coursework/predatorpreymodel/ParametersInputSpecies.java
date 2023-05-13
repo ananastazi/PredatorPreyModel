@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class ParametersInputSpecies {
-
     @FXML
     public TextField numberOfPredators;
     public TextField predatorsEnergy;
@@ -28,8 +27,8 @@ public class ParametersInputSpecies {
 
     private Scene scene;
     private Stage stage;
-
     private EmulationParameters emulationParameters;
+
     public void setEmulationParameters(EmulationParameters emulationParameters) {
         this.emulationParameters = emulationParameters;
     }
@@ -54,6 +53,7 @@ public class ParametersInputSpecies {
         scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm());
 
         UpdateEmulationParameters();
+
         ParametersInputSpecies parametersInputSpecies = fxmlLoader.getController();
         parametersInputSpecies.setEmulationParameters(emulationParameters);
 
@@ -61,6 +61,23 @@ public class ParametersInputSpecies {
         stage.setScene(scene);
         stage.show();
     }
+
+    /*public void Start(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ParametersInputSpecies.fxml"));
+
+        UpdateEmulationParameters();
+
+        ParametersInputSpecies parametersInputSpecies = fxmlLoader.getController();
+        parametersInputSpecies.setEmulationParameters(emulationParameters);
+
+        fxmlLoader = new FXMLLoader(getClass().getResource("GameEmulation.fxml"));
+        scene = new Scene(fxmlLoader.load(), 1280, 800);
+        scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm());
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }*/
 
     private void UpdateEmulationParameters() {
         emulationParameters = new EmulationParameters(emulationParameters, 0, 0, 0, 0, 0, 0 ,0 ,0);

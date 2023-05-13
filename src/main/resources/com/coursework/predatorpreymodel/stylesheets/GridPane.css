@@ -1,0 +1,7 @@
+.gridPane {
+    -fx-background-image: url('../../../../ground.jpg');
+}
+
+.pane {
+    -fx-background-image: url('../../../../ground.jpg');
+}

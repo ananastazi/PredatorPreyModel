@@ -24,14 +24,6 @@ class Cell {
     private Predator predator; // null - empty
     private Prey prey; // null - empty
 
-    public Cell() {
-        this.typeOfCell = 0;
-    }
-
-    public Cell(Integer typeOfCell) {
-        this.typeOfCell = typeOfCell;
-    }
-
     public Integer getTypeOfCell() {
         return typeOfCell;
     }
