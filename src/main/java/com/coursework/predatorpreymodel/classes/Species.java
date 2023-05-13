@@ -16,13 +16,15 @@ public abstract class Species {
     protected Integer currentAge;
     protected Integer maxEnergy;
     protected Boolean causeOfdeath; // cause of death: 0 - from age, 1 - from hunger
+    protected Integer searchRadius;
 
-    public Species(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts) {
+    public Species(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts, Integer searchRadius) {
         this.id = id;
         this.pos = pos;
         this.energy = energy;
         this.criticalEnergy = criticalEnergy;
         this.lifetimeTacts = lifetimeTacts;
+        this.searchRadius = searchRadius;
     }
 
     public Integer getId() {

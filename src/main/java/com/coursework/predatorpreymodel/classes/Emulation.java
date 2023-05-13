@@ -68,11 +68,11 @@ public class Emulation {
         Position pos;
         for (int i = 0; i < emulationParameters.getNumberOfPredators(); ++i) {
                 pos = uniquePositionGenerator.GetPos();
-                predators.add(new Predator(i, pos, emulationParameters.getPredatorsEnergy(), emulationParameters.getPredatorsCriticalEnergy(), emulationParameters.getPredatorsLifespan()));
+                predators.add(new Predator(i, pos, emulationParameters.getPredatorsEnergy(), emulationParameters.getPredatorsCriticalEnergy(), emulationParameters.getPredatorsLifespan(), emulationParameters.getPredatorsSearchRadius()));
         }
         for (int i = 0; i < emulationParameters.getNumberOfPreys(); ++i) {
             pos = uniquePositionGenerator.GetPos();
-            predators.add(new Predator(i, pos, emulationParameters.getPreysEnergy(), emulationParameters.getPreysCriticalEnergy(), emulationParameters.getPreysLifespan()));
+            preys.add(new Prey(i, pos, emulationParameters.getPreysEnergy(), emulationParameters.getPreysCriticalEnergy(), emulationParameters.getPreysLifespan(), emulationParameters.getPreysSearchRadius()));
         }
     }
 

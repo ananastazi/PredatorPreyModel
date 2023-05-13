@@ -7,6 +7,7 @@ public class EmulationParameters {
     private Integer numberOfGrass;
     private Integer predatorsEnergy, predatorsCriticalEnergy, preysEnergy, preysCriticalEnergy;
     private Integer predatorsLifespan, preysLifespan;
+    private Integer predatorsSearchRadius, preysSearchRadius;
 
     public EmulationParameters(EmulationParameters emulationParameters, Integer fieldWidth, Integer fieldHeight, Integer lifeTacts) {
         if (emulationParameters != null) {
@@ -88,5 +89,13 @@ public class EmulationParameters {
 
     public Integer getPreysLifespan() {
         return preysLifespan;
+    }
+
+    public Integer getPredatorsSearchRadius() {
+        return predatorsSearchRadius;
+    }
+
+    public Integer getPreysSearchRadius() {
+        return preysSearchRadius;
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 public class PlayField {
     private static PlayField single_instance = null; // Static variable reference of single_instance of type Singleton
     public List<List<Cell>> field;
+    private Integer width, length;
 
     private PlayField() { }
 
@@ -19,6 +20,8 @@ public class PlayField {
     }
 
     public void setPlayField(Integer width, Integer length) {
+        this.width = width;
+        this.length = length;
         this.field = new ArrayList<>();
         for (int i = 0; i < width; i++) {
             List<Cell> innerList = new ArrayList<>();
@@ -27,6 +30,14 @@ public class PlayField {
             }
             this.field.add(innerList);
         }
+    }
+
+    public Integer getWidth() {
+        return width;
+    }
+
+    public Integer getLength() {
+        return length;
     }
 }
 

@@ -1,8 +1,8 @@
 package com.coursework.predatorpreymodel.classes;
 
 public class Prey extends Species {
-    public Prey(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts) {
-        super(id, pos, energy, criticalEnergy, lifetimeTacts);
+    public Prey(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts, Integer searchRadius) {
+        super(id, pos, energy, criticalEnergy, lifetimeTacts, searchRadius);
     }
 
     @Override

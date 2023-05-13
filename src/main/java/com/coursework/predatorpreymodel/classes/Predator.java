@@ -1,8 +1,11 @@
 package com.coursework.predatorpreymodel.classes;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Predator extends Species {
-    public Predator(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts) {
-        super(id, pos, energy, criticalEnergy, lifetimeTacts);
+    public Predator(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts, Integer searchRadius) {
+        super(id, pos, energy, criticalEnergy, lifetimeTacts, searchRadius);
     }
 
     @Override
@@ -27,6 +30,21 @@ public class Predator extends Species {
     @Override
     public void searchTarget(Integer targetType) {
         // local map/matrix filled with -1;
+        ArrayList<ArrayList<Integer>> localMatrix = new ArrayList<>();
+        PlayField playField = PlayField.getInstance();
+
+        for (int i = 0; i < playField.getWidth(); i++) {
+            ArrayList<Integer> row = new ArrayList<>();
+            for (int j = 0; j < playField.getLength(); j++) {
+                row.add(-1);
+            }
+            localMatrix.add(row);
+        }
+
+        localMatrix.get(this.pos.getX()).set(this.pos.getY(), 0);
+
+
+
         // check target
     }
 
