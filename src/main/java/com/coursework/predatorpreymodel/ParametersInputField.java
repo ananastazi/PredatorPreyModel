@@ -31,7 +31,7 @@ public class ParametersInputField {
         stage.show();
     }
 
-    public void Forward(ActionEvent event) throws IOException {
+    public void Next(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ParametersInputSpecies.fxml"));
         scene = new Scene(fxmlLoader.load(), 1280, 800);
         scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm());
