@@ -59,12 +59,12 @@ public class ParametersInputSpecies {
 
         GameEmulation gameEmulation = fxmlLoader.getController();
         gameEmulation.setEmulationParameters(emulationParameters);
-        gameEmulation.GenerateEmulationSystem();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
 
+        gameEmulation.GenerateEmulationSystem(stage);
         gameEmulation.RunEmulation();
     }
 
