@@ -59,9 +59,9 @@ public class ParametersInputSpecies {
 
         GameEmulation gameEmulation = fxmlLoader.getController();
         gameEmulation.setEmulationParameters(emulationParameters);
-        gameEmulation.GenerateEmulationSystem();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        gameEmulation.GenerateEmulationSystem();
         stage.setScene(scene);
         stage.show();
 
@@ -81,7 +81,7 @@ preysLifespan;
 */
         String result = CheckInput(numberOfPredators.getText(), 0, 100);
         if (result != "")
-            return numberOfPredators + result;
+            return numberOfPredators.getText() + result;
         emulationParameters = new EmulationParameters(emulationParameters, 0, 0, 0, 0, 0, 0 ,0 ,0);
         return "";
     }

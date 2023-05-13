@@ -2,6 +2,7 @@ package com.coursework.predatorpreymodel.classes;
 
 import javafx.util.Pair;
 import java.util.Random;
+
 public class Grass {
     protected Pair<Integer, Integer> pos;
     protected Integer id;

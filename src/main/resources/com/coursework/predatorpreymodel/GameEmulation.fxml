@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@stylesheets/GridPane.css" fx:controller="com.coursework.predatorpreymodel.GameEmulation">
+<AnchorPane fx:id="anchorPaneID" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@stylesheets/GridPane.css" fx:controller="com.coursework.predatorpreymodel.GameEmulation">
    <children>
-      <GridPane gridLinesVisible="true" layoutX="229.0" layoutY="277.0" prefHeight="246.0" prefWidth="278.0" styleClass="gridPane" style="-fx-border-color: white;">
+      <GridPane fx:id="gridPane" gridLinesVisible="true" layoutX="229.0" layoutY="277.0" prefHeight="246.0" prefWidth="278.0" styleClass="gridPane" style="-fx-border-color: white;">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
