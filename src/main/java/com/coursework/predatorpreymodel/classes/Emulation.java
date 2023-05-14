@@ -1,7 +1,5 @@
 package com.coursework.predatorpreymodel.classes;
 
-import com.coursework.predatorpreymodel.UniquePositionGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
 
