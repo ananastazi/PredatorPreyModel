@@ -31,4 +31,14 @@ public class HomeScreen {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void Rules(ActionEvent event)  throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Rules.fxml"));
+        scene = new Scene(fxmlLoader.load(), 1280, 800);
+        scene.getStylesheets().add(getClass().getResource("stylesheets/Rules.css").toExternalForm());
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
 }
