@@ -115,20 +115,17 @@ public class ParametersInputField {
             numberOfIndividuals.setText(String.valueOf(Integer.parseInt(fieldHeight.getText()) * Integer.parseInt(fieldWidth.getText())));
         }
         else {
-            if (fieldHeight.getText() != null && fieldHeight.getText().length() != 0)
-                height = Integer.parseInt(fieldHeight.getText());
-            if (fieldWidth.getText() != null && fieldWidth.getText().length() != 0)
-                width = Integer.parseInt(fieldWidth.getText());
             if (height == -1 && width == -1) {
-                fieldHeight.setText(String.valueOf((int)(ceil(sqrt(amount)))));
-                fieldWidth.setText(String.valueOf(amount / Integer.parseInt(fieldHeight.getText()) + 1));
+                fieldHeight.setText(String.valueOf((int)(ceil(sqrt(amount * 4)))));
+                fieldWidth.setText(String.valueOf((int)(ceil(sqrt(amount * 4)))));
             }
             else if (height == -1)
-                fieldHeight.setText(String.valueOf(amount / Integer.parseInt(fieldWidth.getText()) + 1));
+                fieldHeight.setText(String.valueOf(amount * 4 / Integer.parseInt(fieldWidth.getText()) + 1));
             else if (width == -1)
-                fieldWidth.setText(String.valueOf(amount / Integer.parseInt(fieldHeight.getText()) + 1));
+                fieldWidth.setText(String.valueOf(amount * 4 / Integer.parseInt(fieldHeight.getText()) + 1));
         }
-        if (Integer.parseInt(fieldHeight.getText()) * Integer.parseInt(fieldWidth.getText()) < Integer.parseInt(numberOfIndividuals.getText()))
+        if (fieldWidth.getText() != null && fieldWidth.getText().length() != 0
+                && Integer.parseInt(fieldHeight.getText()) * Integer.parseInt(fieldWidth.getText()) < Integer.parseInt(numberOfIndividuals.getText()))
             return "Text field 'Number of individuals' must be less than 'field height' by 'field width'";
 
         return "";

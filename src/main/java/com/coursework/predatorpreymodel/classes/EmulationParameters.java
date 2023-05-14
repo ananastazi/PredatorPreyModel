@@ -26,7 +26,7 @@ public class EmulationParameters {
     public void setEmulationParametersField(String fieldHeight, String fieldWidth, String numberOfIndividuals, String lifeTacts) {
         this.fieldWidth = setNumber(fieldWidth, 10);
         this.fieldHeight = setNumber(fieldHeight, 10);
-        this.numberOfIndividuals = setNumber(numberOfIndividuals, this.fieldHeight * this.fieldWidth * 4 / 5);
+        this.numberOfIndividuals = setNumber(numberOfIndividuals, this.fieldHeight * this.fieldWidth / 4);
         this.lifeTacts = setNumber(lifeTacts, 10);
         this.numberOfGrass = this.fieldHeight * this.fieldWidth;
     }

@@ -20,7 +20,6 @@ public class GameEmulation {
 
     public void GenerateEmulationSystem() {
         this.emulation = new Emulation();
-
     }
 
     public void RunEmulation() {
