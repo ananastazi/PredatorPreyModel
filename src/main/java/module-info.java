@@ -12,4 +12,6 @@ module com.coursework.predatorpreymodel {
 
     opens com.coursework.predatorpreymodel to javafx.fxml;
     exports com.coursework.predatorpreymodel;
+    exports com.coursework.predatorpreymodel.classes;
+    opens com.coursework.predatorpreymodel.classes to javafx.fxml;
 }

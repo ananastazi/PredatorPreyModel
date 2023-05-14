@@ -1,6 +1,4 @@
-package com.coursework.predatorpreymodel;
-
-import com.coursework.predatorpreymodel.classes.Position;
+package com.coursework.predatorpreymodel.classes;
 
 import java.util.Random;
 
