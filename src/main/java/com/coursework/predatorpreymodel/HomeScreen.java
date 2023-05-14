@@ -30,6 +30,10 @@ public class HomeScreen {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Rules.fxml"));
         scene = new Scene(fxmlLoader.load(), 1280, 800);
         scene.getStylesheets().add(getClass().getResource("stylesheets/Rules.css").toExternalForm());
+        Rules rules = fxmlLoader.getController();
+        rules.backButton.setFocusTraversable(false);
+        rules.startButton.setFocusTraversable(false);
+        rules.exitButton.setFocusTraversable(false);
 
         stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         stage.setScene(scene);

@@ -11,6 +11,26 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@stylesheets/Rules.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coursework.predatorpreymodel.Rules">
    <children>
+      <ImageView fitHeight="118.0" fitWidth="187.0" layoutX="911.0" rotate="180.0">
+         <image>
+            <Image url="@../../../media/fox3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="227.0" fitWidth="257.0" layoutX="37.0" layoutY="572.0">
+         <image>
+            <Image url="@../../../media/wolf2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="94.0" fitWidth="136.0" layoutX="226.0" rotate="180.0">
+         <image>
+            <Image url="@../../../media/mouse2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="129.0" fitWidth="187.0" layoutX="1004.0" layoutY="674.0">
+         <image>
+            <Image url="@../../../media/rabbit3.png" />
+         </image>
+      </ImageView>
       <Text fill="WHITE" layoutX="64.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Predator vs Prey game is a simulation model designed on a cellular automaton and applies the principles of Game of Life and Predators-preys models. The goal of the game is to observe the dynamics of the ecosystem, where predators and preys are in the lead roles." textAlignment="CENTER" wrappingWidth="1133.44140625">
          <font>
             <Font size="29.0" />
@@ -55,25 +75,5 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <ImageView fitHeight="118.0" fitWidth="187.0" layoutX="911.0" rotate="180.0">
-         <image>
-            <Image url="@../../../media/fox3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="227.0" fitWidth="257.0" layoutX="37.0" layoutY="572.0">
-         <image>
-            <Image url="@../../../media/wolf2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="94.0" fitWidth="136.0" layoutX="226.0" rotate="180.0">
-         <image>
-            <Image url="@../../../media/mouse2.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="129.0" fitWidth="187.0" layoutX="1004.0" layoutY="674.0">
-         <image>
-            <Image url="@../../../media/rabbit3.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>
