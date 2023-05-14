@@ -1,5 +1,8 @@
 package com.coursework.predatorpreymodel.classes;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,15 +44,19 @@ public class Emulation {
         for (int i = 0; i < emulationParameters.getNumberOfPredators(); ++i) {
             pos = uniquePositionGenerator.GetNewPos();
             predators.add(new Predator(i, pos, emulationParameters.getPredatorsEnergy(), emulationParameters.getPredatorsCriticalEnergy(), emulationParameters.getPredatorsLifespan(), emulationParameters.getPredatorsSearchRadius()));
+            playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(predators.get(predators.size() - 1));
         }
         for (int i = 0; i < emulationParameters.getNumberOfPreys(); ++i) {
             pos = uniquePositionGenerator.GetNewPos();
             preys.add(new Prey(i, pos, emulationParameters.getPreysEnergy(), emulationParameters.getPreysCriticalEnergy(), emulationParameters.getPreysLifespan(), emulationParameters.getPreysSearchRadius()));
+            playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(preys.get(preys.size() - 1));
         }
     }
 
-    void performTact() {
-
+    public void performTact() {
+        for (Predator predator : predators) {
+            predator.act();
+        }
     }
 
     // region Getters/Setters

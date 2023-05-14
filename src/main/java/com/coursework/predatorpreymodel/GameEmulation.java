@@ -4,9 +4,14 @@ import com.coursework.predatorpreymodel.classes.*;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Math.min;
 
@@ -14,7 +19,10 @@ public class GameEmulation {
     public AnchorPane anchorPane;
     private Scene scene;
     private Stage stage;
-    public GridPane gridPane;
+    private GridPane gridPane;
+    private List<ImageView> grass;
+    private final List<Image> speciesImg = new ArrayList<>(2); // create Image "fox.png" and "rabbit.png"
+    private List<List<ImageView>> cells; // predator/prey will be put inside
     Emulation emulation;
     private final EmulationParameters emulationParameters = EmulationParameters.getInstance();
 
@@ -23,8 +31,12 @@ public class GameEmulation {
     }
 
     public void RunEmulation() {
-
-        // operating emulation tacts/generations here
+        this.emulation.prepareEmulation();
+        prepareScene();
+        for (int i = 0; i < emulationParameters.getLifeTacts(); i++) {
+            emulation.performTact();
+            UpdateScene();
+        }
     }
 
     public void GenerateScene(Stage stage) {
@@ -55,6 +67,10 @@ public class GameEmulation {
         scene = new Scene(anchorPane, 1280, 800);
         this.stage.setScene(scene);
         this.stage.show();
+    }
+
+    private void prepareScene() {
+        // adding grass to gridPane
     }
 
     private void UpdateScene() {

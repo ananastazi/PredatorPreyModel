@@ -15,11 +15,11 @@ public class Cell {
         this.typeOfCell = typeOfCell;
     }
 
-    public void setIndividual(Species individual) {
-        this.individual = individual;
-    }
-
     public Species getIndividual() {
         return individual;
+    }
+
+    public void setIndividual(Species individual) {
+        this.individual = individual;
     }
 }
