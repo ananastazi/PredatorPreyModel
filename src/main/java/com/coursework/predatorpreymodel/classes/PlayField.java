@@ -19,27 +19,33 @@ public class PlayField {
         return single_instance;
     }
 
-    public void setPlayField(Integer width, Integer height) {
-        this.width = width;
+    public void setPlayField(Integer height, Integer width) {
         this.height = height;
+        this.width = width;
         this.field = new ArrayList<>();
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < height; i++) {
             List<Cell> innerList = new ArrayList<>();
-            for (int j = 0; j < height; j++) {
+            for (int j = 0; j < width; j++) {
                 innerList.add(new Cell());
             }
             this.field.add(innerList);
         }
     }
 
-    public List<List<Cell>> getField() { return field; }
-
-    public Integer getWidth() {
-        return width;
+    public void resetPlayField() {
+        this.field = null;
+        this.width = 0;
+        this.height = 0;
     }
+
+    public List<List<Cell>> getField() { return field; }
 
     public Integer getHeight() {
         return height;
+    }
+
+    public Integer getWidth() {
+        return width;
     }
 }
 

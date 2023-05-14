@@ -2,6 +2,7 @@ package com.coursework.predatorpreymodel;
 
 import com.coursework.predatorpreymodel.classes.EmulationParameters;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -10,25 +11,40 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+import static java.lang.Math.*;
+
 public class ParametersInputField {
-    public TextField lifeTacts;
+    @FXML
     public TextField fieldHeight;
     public TextField fieldWidth;
+    public TextField numberOfIndividuals;
+    public TextField lifeTacts;
+
     private Stage stage;
     private Scene scene;
 
-    private EmulationParameters emulationParameters;
-    public void setEmulationParameters(EmulationParameters emulationParameters) {
-        this.emulationParameters = emulationParameters;
+    EmulationParameters emulationParameters = EmulationParameters.getInstance();
+    public void initializeTextFields() {
+        initializeTextField(fieldHeight, emulationParameters.getFieldHeight());
+        initializeTextField(fieldWidth, emulationParameters.getFieldWidth());
+        initializeTextField(numberOfIndividuals, emulationParameters.getNumberOfIndividuals());
+        initializeTextField(lifeTacts, emulationParameters.getLifeTacts());
     }
+    private void initializeTextField(TextField field, Integer value) {
+        if (value != null)
+            field.setText(String.valueOf(value));
+    }
+
     public void Back(ActionEvent event) throws IOException {
+        String errorMessage = UpdateEmulationParameters();
+        if (errorMessage != "") {
+            System.out.println(errorMessage);
+            return;
+        }
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
         scene = new Scene(fxmlLoader.load(), 1280, 800);
         scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm());
-
-        UpdateEmulationParameters();
-        HomeScreen homeScreen = fxmlLoader.getController();
-        homeScreen.setEmulationParameters(emulationParameters);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -36,13 +52,18 @@ public class ParametersInputField {
     }
 
     public void Next(ActionEvent event) throws IOException {
+        String errorMessage = UpdateEmulationParameters();
+        if (errorMessage != "") {
+            System.out.println(errorMessage);
+            return;
+        }
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ParametersInputSpecies.fxml"));
         scene = new Scene(fxmlLoader.load(), 1280, 800);
         scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm());
 
-        UpdateEmulationParameters();
         ParametersInputSpecies parametersInputSpecies = fxmlLoader.getController();
-        parametersInputSpecies.setEmulationParameters(emulationParameters);
+        parametersInputSpecies.initializeTextFields();
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -50,15 +71,74 @@ public class ParametersInputField {
     }
 
     private String UpdateEmulationParameters() {
-        emulationParameters = new EmulationParameters(emulationParameters, 0, 0, 0);
+        String errorMessage = checkInputs();
+        if (errorMessage.length() != 0)
+            return errorMessage;
+
+        emulationParameters.setEmulationParametersField(fieldHeight.getText(), fieldWidth.getText(), numberOfIndividuals.getText(), lifeTacts.getText());
+        return "";
+    }
+
+    private String checkInputs() {
+        String errorMessage;
+
+        errorMessage = CheckInput(fieldHeight.getText(), 1, 50);
+        if (errorMessage.length() != 0)
+            return "Text field 'field height'" + errorMessage;
+
+        errorMessage = CheckInput(fieldWidth.getText(), 1, 50);
+        if (errorMessage.length() != 0)
+            return "Text field 'field width'" + errorMessage;
+
+        errorMessage = CheckInput(numberOfIndividuals.getText(), 0, 1000);
+        if (errorMessage.length() != 0)
+            return "Text field 'Predator max energy'" + errorMessage;
+
+        errorMessage = CheckInput(lifeTacts.getText(), 1, 500);
+        if (errorMessage.length() != 0)
+            return "Text field 'Predators lifespan'" + errorMessage;
+
+        int height = -1, width = -1;
+        if (fieldHeight.getText() != null && fieldHeight.getText().length() != 0)
+            height = Integer.parseInt(fieldHeight.getText());
+        if (fieldWidth.getText() != null && fieldWidth.getText().length() != 0)
+            width = Integer.parseInt(fieldWidth.getText());
+
+        int amount = -1;
+        if (numberOfIndividuals.getText() != null && numberOfIndividuals.getText().length() != 0)
+            amount = Integer.parseInt(numberOfIndividuals.getText());
+        if (amount == -1) {
+            if (fieldHeight.getText() == null || fieldHeight.getText().length() == 0)
+                fieldHeight.setText("10");
+            if (fieldWidth.getText() == null || fieldWidth.getText().length() == 0)
+                fieldWidth.setText("10");
+            numberOfIndividuals.setText(String.valueOf(Integer.parseInt(fieldHeight.getText()) * Integer.parseInt(fieldWidth.getText())));
+        }
+        else {
+            if (fieldHeight.getText() != null && fieldHeight.getText().length() != 0)
+                height = Integer.parseInt(fieldHeight.getText());
+            if (fieldWidth.getText() != null && fieldWidth.getText().length() != 0)
+                width = Integer.parseInt(fieldWidth.getText());
+            if (height == -1 && width == -1) {
+                fieldHeight.setText(String.valueOf((int)(ceil(sqrt(amount)))));
+                fieldWidth.setText(String.valueOf(amount / Integer.parseInt(fieldHeight.getText()) + 1));
+            }
+            else if (height == -1)
+                fieldHeight.setText(String.valueOf(amount / Integer.parseInt(fieldWidth.getText()) + 1));
+            else if (width == -1)
+                fieldWidth.setText(String.valueOf(amount / Integer.parseInt(fieldHeight.getText()) + 1));
+        }
+        if (Integer.parseInt(fieldHeight.getText()) * Integer.parseInt(fieldWidth.getText()) < Integer.parseInt(numberOfIndividuals.getText()))
+            return "Text field 'Number of individuals' must be less than 'field height' by 'field width'";
+
         return "";
     }
 
     private String CheckInput(String strNum, Integer min, Integer max) {
-        if (strNum == null) {
+        if (strNum == null || strNum.length() == 0) {
             return "";
         }
-        Integer d;
+        int d;
         try {
             d = Integer.parseInt(strNum);
         } catch (NumberFormatException nfe) {

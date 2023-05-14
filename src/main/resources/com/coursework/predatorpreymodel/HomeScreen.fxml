@@ -31,7 +31,7 @@
          <Button fx:id="rulesButton" layoutX="530.0" layoutY="555.0" mnemonicParsing="false" onAction="#Rules" styleClass="home-buttons">
             Rules
          </Button>
-         <Button fx:id="exitButton" layoutX="530.0" layoutY="658.0" mnemonicParsing="false" prefHeight="89.0" styleClass="home-buttons">
+         <Button fx:id="exitButton" layoutX="530.0" layoutY="658.0" mnemonicParsing="false" onAction="#Exit" prefHeight="89.0" styleClass="home-buttons">
             Exit
          </Button>
       <Label fx:id="predatorVSpreyLabel1" contentDisplay="CENTER" layoutX="597.0" layoutY="188.0" prefHeight="65.0" prefWidth="135.0" styleClass="predator-vs-prey" text="vs" />

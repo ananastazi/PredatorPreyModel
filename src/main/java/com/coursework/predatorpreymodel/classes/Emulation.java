@@ -10,42 +10,14 @@ public class Emulation {
     private List<Predator> predators;
     private List<Prey> preys;
     private List<Grass> grass;
-    private EmulationParameters emulationParameters;
+    private EmulationParameters emulationParameters = EmulationParameters.getInstance();
 
-    public Emulation(EmulationParameters emulationParameters) {
-        this.emulationParameters = emulationParameters;
+    public Emulation() {
         this.playField = PlayField.getInstance();
-        this.predators = new ArrayList<>(emulationParameters.getNumberOfPredators());
-        this.preys = new ArrayList<>(emulationParameters.getNumberOfPreys());
-        this.grass = new ArrayList<>(emulationParameters.getNumberOfGrass());
-    }
-
-    public PlayField getPlayField() {
-        return playField;
-    }
-
-    public List<Predator> getPredators() {
-        return predators;
-    }
-
-    public void setPredators(List<Predator> predators) {
-        this.predators = predators;
-    }
-
-    public List<Prey> getPreys() {
-        return preys;
-    }
-
-    public void setPreys(List<Prey> preys) {
-        this.preys = preys;
-    }
-
-    public List<Grass> getGrass() {
-        return grass;
-    }
-
-    public void setGrass(List<Grass> grass) {
-        this.grass = grass;
+        this.playField.resetPlayField();
+        this.predators = null;
+        this.preys = null;
+        this.grass = null;
     }
 
     public void prepareEmulation() {
@@ -55,23 +27,26 @@ public class Emulation {
     }
 
     void cellsFieldPlacing() {
-        for (int i = 0; i < playField.field.size(); ++i) {
-            for (int j = 0; j < playField.field.get(0).size(); j++) {
-                Integer id = i * playField.field.size() + j;
-                grass.add(new Grass(new Position(i, j), id));
-                playField.field.get(i).get(j).setTypeOfCell(1);
-            }
+        UniquePositionGenerator uniquePositionGenerator = new UniquePositionGenerator(emulationParameters.getFieldHeight(), emulationParameters.getFieldWidth());
+        Position pos;
+        this.grass = new ArrayList<>();
+        for (int i = 0; i < emulationParameters.getNumberOfGrass(); ++i) {
+            pos = uniquePositionGenerator.GetNewPos();
+            grass.add(new Grass(pos, i));
+            playField.getField().get(pos.getX()).get(pos.getY()).setTypeOfCell(1);
         }
     }
     void individualsFieldPlacing() {
         UniquePositionGenerator uniquePositionGenerator = new UniquePositionGenerator(emulationParameters.getFieldHeight(), emulationParameters.getFieldWidth());
         Position pos;
+        predators = new ArrayList<>();
+        preys = new ArrayList<>();
         for (int i = 0; i < emulationParameters.getNumberOfPredators(); ++i) {
-            pos = uniquePositionGenerator.GetPos();
+            pos = uniquePositionGenerator.GetNewPos();
             predators.add(new Predator(i, pos, emulationParameters.getPredatorsEnergy(), emulationParameters.getPredatorsCriticalEnergy(), emulationParameters.getPredatorsLifespan(), emulationParameters.getPredatorsSearchRadius()));
         }
         for (int i = 0; i < emulationParameters.getNumberOfPreys(); ++i) {
-            pos = uniquePositionGenerator.GetPos();
+            pos = uniquePositionGenerator.GetNewPos();
             preys.add(new Prey(i, pos, emulationParameters.getPreysEnergy(), emulationParameters.getPreysCriticalEnergy(), emulationParameters.getPreysLifespan(), emulationParameters.getPreysSearchRadius()));
         }
     }
@@ -79,4 +54,22 @@ public class Emulation {
     void performTact() {
 
     }
+
+    // region Getters/Setters
+    public PlayField getPlayField() {
+        return playField;
+    }
+
+    public List<Predator> getPredators() {
+        return predators;
+    }
+
+    public List<Prey> getPreys() {
+        return preys;
+    }
+
+    public List<Grass> getGrass() {
+        return grass;
+    }
+    // endregion
 }

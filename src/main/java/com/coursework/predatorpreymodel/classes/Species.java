@@ -8,21 +8,22 @@ public abstract class Species {
     // IS IT POSITION OR POSITION + ID ?????????????
     protected Position target;
     protected Integer typeOfTarget;
-    protected Integer energy;
     protected Integer criticalEnergy;
+    protected Integer energy;
+    protected Integer maxEnergy;
     protected Integer amountOfEnergyForReproduction;
+    protected Integer amountOfEnergyForMovement;
     protected Integer lifetimeTacts;
     protected Integer state;
     protected Integer currentAge;
-    protected Integer maxEnergy;
     protected Integer causeOfdeath; // cause of death: 0 - from age, 1 - from hunger, 2 - eaten
     protected Integer searchRadius;
 
     public Species(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts, Integer searchRadius) {
         this.id = id;
         this.pos = pos;
-        this.energy = energy;
         this.criticalEnergy = criticalEnergy;
+        this.energy = energy;
         this.lifetimeTacts = lifetimeTacts;
         this.searchRadius = searchRadius;
     }

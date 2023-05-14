@@ -23,7 +23,7 @@ public class GameEmulation {
     }
 
     public void GenerateEmulationSystem() {
-        this.emulation = new Emulation(emulationParameters);
+        this.emulation = new Emulation();
 
     }
 

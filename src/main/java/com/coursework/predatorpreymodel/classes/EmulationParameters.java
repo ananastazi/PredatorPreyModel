@@ -1,48 +1,55 @@
 package com.coursework.predatorpreymodel.classes;
 
+import eu.hansolo.fx.countries.tools.CRegion;
+
+import static java.lang.Math.min;
+
 public class EmulationParameters {
-    private Integer fieldWidth = 10, fieldHeight = 10;
-    private Integer lifeTacts = 10;
-    private Integer numberOfPredators = 2, numberOfPreys = 2;
+    private static EmulationParameters single_instance = null;
+    private Integer fieldHeight, fieldWidth;
+    private Integer lifeTacts;
     private Integer numberOfGrass;
-    private Integer predatorsEnergy, predatorsCriticalEnergy, preysEnergy, preysCriticalEnergy;
+    private Integer numberOfIndividuals;
+    private Integer numberOfPredators, numberOfPreys;
+    private Integer predatorsCriticalEnergy, preysCriticalEnergy;
+    private Integer predatorsEnergy, preysEnergy;
+    private Integer predatorsMaxEnergy, preysMaxEnergy;
     private Integer predatorsLifespan, preysLifespan;
-    private Integer predatorsSearchRadius, preysSearchRadius;
-
-    public EmulationParameters(EmulationParameters emulationParameters, Integer fieldWidth, Integer fieldHeight, Integer lifeTacts) {
-        if (emulationParameters != null) {
-            this.numberOfPredators = emulationParameters.numberOfPredators;
-            this.numberOfPreys = emulationParameters.numberOfPreys;
-            this.predatorsEnergy = emulationParameters.predatorsEnergy;
-            this.predatorsCriticalEnergy = emulationParameters.predatorsCriticalEnergy;
-            this.preysEnergy = emulationParameters.preysEnergy;
-            this.preysCriticalEnergy = emulationParameters.preysCriticalEnergy;
-            this.predatorsLifespan = emulationParameters.predatorsLifespan;
-            this.preysLifespan = emulationParameters.preysLifespan;
-        }
-
-        this.fieldWidth = fieldWidth;
-        this.fieldHeight = fieldHeight;
-        this.lifeTacts = lifeTacts;
-        this.numberOfGrass = fieldHeight * fieldWidth;
-    }
-    public EmulationParameters(EmulationParameters emulationParameters, Integer numberOfPredators, Integer numberOfPreys, Integer predatorsEnergy, Integer predatorsCriticalEnergy, Integer preysEnergy, Integer preysCriticalEnergy, Integer predatorsLifespan, Integer preysLifespan) {
-        if (emulationParameters != null) {
-            this.fieldWidth = emulationParameters.fieldWidth;
-            this.fieldHeight = emulationParameters.fieldHeight;
-            this.lifeTacts = emulationParameters.lifeTacts;
-            this.numberOfGrass = emulationParameters.numberOfGrass;
-        }
-        this.numberOfPredators = numberOfPredators;
-        this.numberOfPreys = numberOfPreys;
-        this.predatorsEnergy = predatorsEnergy;
-        this.predatorsCriticalEnergy = predatorsCriticalEnergy;
-        this.preysEnergy = preysEnergy;
-        this.preysCriticalEnergy = preysCriticalEnergy;
-        this.predatorsLifespan = predatorsLifespan;
-        this.preysLifespan = preysLifespan;
+    private Integer predatorsSearchRadius = 6, preysSearchRadius = 4;
+    private EmulationParameters() {}
+    public static synchronized EmulationParameters getInstance() {
+        if (single_instance == null)
+            single_instance = new EmulationParameters();
+        return single_instance;
     }
 
+    public void setEmulationParametersField(String fieldHeight, String fieldWidth, String numberOfIndividuals, String lifeTacts) {
+        this.fieldWidth = setNumber(fieldWidth, 10);
+        this.fieldHeight = setNumber(fieldHeight, 10);
+        this.numberOfIndividuals = setNumber(numberOfIndividuals, this.fieldHeight * this.fieldWidth * 4 / 5);
+        this.lifeTacts = setNumber(lifeTacts, 10);
+        this.numberOfGrass = this.fieldHeight * this.fieldWidth;
+    }
+    public void setEmulationParametersSpecies(String numberOfPredators, String predatorsMaxEnergy, String predatorsCriticalEnergy, String predatorsLifespan, String numberOfPreys, String preysMaxEnergy, String preysCriticalEnergy, String preysLifespan) {
+        this.numberOfPredators = setNumber(numberOfPredators, numberOfIndividuals * 2 / 5);
+        this.predatorsCriticalEnergy = setNumber(predatorsCriticalEnergy, 2);
+        this.predatorsMaxEnergy = setNumber(predatorsMaxEnergy, this.predatorsCriticalEnergy + 10);
+        this.predatorsEnergy = this.predatorsCriticalEnergy + min(10, (this.predatorsMaxEnergy - this.predatorsCriticalEnergy) / 2);
+        this.predatorsLifespan = setNumber(predatorsLifespan, 7);
+        this.numberOfPreys = setNumber(numberOfPreys, min(6, numberOfIndividuals - this.numberOfPredators));
+        this.preysCriticalEnergy = setNumber(preysCriticalEnergy, 2);
+        this.preysMaxEnergy = setNumber(preysMaxEnergy, this.preysCriticalEnergy + 10);
+        this.preysEnergy = this.preysCriticalEnergy + min(3, (this.preysMaxEnergy - this.preysCriticalEnergy) / 2);
+        this.preysLifespan = setNumber(preysLifespan, 5);
+    }
+
+    private Integer setNumber(String strNumber, Integer standardValue) {
+        if (strNumber != null && strNumber.length() != 0)
+            return Integer.parseInt(strNumber);
+        return standardValue;
+    }
+
+    // region Getters
     public Integer getFieldHeight() {
         return fieldHeight;
     }
@@ -55,6 +62,9 @@ public class EmulationParameters {
         return lifeTacts;
     }
 
+    public Integer getNumberOfIndividuals() {
+        return numberOfIndividuals;
+    }
     public Integer getNumberOfPredators() {
         return numberOfPredators;
     }
@@ -67,20 +77,28 @@ public class EmulationParameters {
         return numberOfGrass;
     }
 
+    public Integer getPredatorsCriticalEnergy() {
+        return predatorsCriticalEnergy;
+    }
+
     public Integer getPredatorsEnergy() {
         return predatorsEnergy;
     }
 
-    public Integer getPredatorsCriticalEnergy() {
-        return predatorsCriticalEnergy;
+    public Integer getPredatorsMaxEnergy() {
+        return predatorsMaxEnergy;
+    }
+
+    public Integer getPreysCriticalEnergy() {
+        return preysCriticalEnergy;
     }
 
     public Integer getPreysEnergy() {
         return preysEnergy;
     }
 
-    public Integer getPreysCriticalEnergy() {
-        return preysCriticalEnergy;
+    public Integer getPreysMaxEnergy() {
+        return preysMaxEnergy;
     }
 
     public Integer getPredatorsLifespan() {
@@ -98,4 +116,5 @@ public class EmulationParameters {
     public Integer getPreysSearchRadius() {
         return preysSearchRadius;
     }
+    // endregion
 }

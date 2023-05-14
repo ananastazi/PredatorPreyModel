@@ -23,7 +23,7 @@ public class UniquePositionGenerator {
             nodes[i] = i;
         }
     }
-    public Position GetPos() {
+    public Position GetNewPos() {
         Integer rndIndex = Root(random.nextInt(nodes.length));
         Union(rndIndex, (rndIndex + 1) % nodes.length);
         return new Position(rndIndex / width, rndIndex % width);
