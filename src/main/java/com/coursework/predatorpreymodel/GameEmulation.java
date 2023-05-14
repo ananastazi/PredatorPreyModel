@@ -20,9 +20,10 @@ public class GameEmulation {
     private Scene scene;
     private Stage stage;
     private GridPane gridPane;
-    private List<ImageView> grass;
+    private final List<Image> cellsImg = new ArrayList<>(2); // create Image "ground.png" and "grass.png"
+    private List<List<ImageView>> cellsForForegroundImages;
     private final List<Image> speciesImg = new ArrayList<>(2); // create Image "fox.png" and "rabbit.png"
-    private List<List<ImageView>> cells; // predator/prey will be put inside
+    private List<List<ImageView>> cellsForIndividuals; // predator/prey will be put inside
     Emulation emulation;
     private final EmulationParameters emulationParameters = EmulationParameters.getInstance();
 
@@ -58,6 +59,11 @@ public class GameEmulation {
             gridPane.getRowConstraints().add(rowConst);
         }
 
+        // for height
+        //        for width
+        // initialize cellsForSpecies and cellsForForegroundImages (list of lists of imageView) and put each one in the gridPane
+        // here you can put imageView with ground
+
         gridPane.setLayoutY((800 - height * gridPaneSize) / 2);
         gridPane.setStyle("-fx-grid-lines-visible: true; -fx-border-color: white; -fx-background-color: black;");
 
@@ -70,7 +76,7 @@ public class GameEmulation {
     }
 
     private void prepareScene() {
-        // adding grass to gridPane
+        // adding grass to cellsForForegroundImages based on the List emulation.getGrass()
     }
 
     private void UpdateScene() {
