@@ -52,6 +52,7 @@ public class ParametersInputSpecies {
         String errorMessage = UpdateEmulationParameters();
         if (errorMessage != "") {
             System.out.println(errorMessage);
+            AlertBox.display(errorMessage);
             return;
         }
 
@@ -71,6 +72,7 @@ public class ParametersInputSpecies {
         String errorMessage = UpdateEmulationParameters();
         if (errorMessage.length() != 0) {
             System.out.println(errorMessage);
+            AlertBox.display(errorMessage);
             return;
         }
 
@@ -112,7 +114,7 @@ public class ParametersInputSpecies {
 
         errorMessage = CheckInput(numberOfPreys.getText(), 0, emulationParameters.getNumberOfIndividuals());
         if (errorMessage.length() != 0)
-            return "Text field 'Number of predators'" + errorMessage;
+            return "Text field 'Number of preys'" + errorMessage;
 
         errorMessage = CheckInput(preysCriticEnergy.getText(), 0, 100);
         if (errorMessage.length() != 0)

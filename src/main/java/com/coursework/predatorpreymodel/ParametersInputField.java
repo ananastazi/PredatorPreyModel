@@ -39,6 +39,7 @@ public class ParametersInputField {
         String errorMessage = UpdateEmulationParameters();
         if (errorMessage != "") {
             System.out.println(errorMessage);
+            AlertBox.display(errorMessage);
             return;
         }
 
@@ -55,6 +56,7 @@ public class ParametersInputField {
         String errorMessage = UpdateEmulationParameters();
         if (errorMessage != "") {
             System.out.println(errorMessage);
+            AlertBox.display(errorMessage);
             return;
         }
 
