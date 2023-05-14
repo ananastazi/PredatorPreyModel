@@ -16,11 +16,7 @@ public class GameEmulation {
     private Stage stage;
     public GridPane gridPane;
     Emulation emulation;
-    private EmulationParameters emulationParameters;
-
-    public void setEmulationParameters(EmulationParameters emulationParameters) {
-        this.emulationParameters = emulationParameters;
-    }
+    private final EmulationParameters emulationParameters = EmulationParameters.getInstance();
 
     public void GenerateEmulationSystem() {
         this.emulation = new Emulation();
@@ -36,8 +32,8 @@ public class GameEmulation {
         this.stage = stage; // PROBABLY NOT NECESSARY
         gridPane = new GridPane();
 // MUST BE CONNECTED TO EmulationParameters instance
-        Integer width = 10;
-        Integer height = 10;
+        Integer height = emulationParameters.getFieldHeight();
+        Integer width = emulationParameters.getFieldWidth();
         double gridPaneSize = min(900.0 / width, 800.0 / height);
 
         for (int i = 0; i < width; i++) {
@@ -58,8 +54,8 @@ public class GameEmulation {
         anchorPane.setBackground(Background.fill(Color.BLACK));
         anchorPane.getChildren().add(gridPane);
         scene = new Scene(anchorPane, 1280, 800);
-        stage.setScene(scene);
-        stage.show();
+        this.stage.setScene(scene);
+        this.stage.show();
     }
 
     private void UpdateScene() {

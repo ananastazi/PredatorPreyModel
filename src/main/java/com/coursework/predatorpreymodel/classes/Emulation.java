@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Emulation {
-    private PlayField playField;
+    private PlayField playField = PlayField.getInstance();
     private List<Predator> predators;
     private List<Prey> preys;
     private List<Grass> grass;
-    private EmulationParameters emulationParameters = EmulationParameters.getInstance();
+    private final EmulationParameters emulationParameters = EmulationParameters.getInstance();
 
     public Emulation() {
-        this.playField = PlayField.getInstance();
         this.playField.resetPlayField();
         this.predators = null;
         this.preys = null;

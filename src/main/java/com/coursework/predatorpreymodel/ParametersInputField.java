@@ -23,7 +23,7 @@ public class ParametersInputField {
     private Stage stage;
     private Scene scene;
 
-    EmulationParameters emulationParameters = EmulationParameters.getInstance();
+    private final EmulationParameters emulationParameters = EmulationParameters.getInstance();
     public void initializeTextFields() {
         initializeTextField(fieldHeight, emulationParameters.getFieldHeight());
         initializeTextField(fieldWidth, emulationParameters.getFieldWidth());

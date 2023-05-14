@@ -33,7 +33,7 @@ public class ParametersInputSpecies {
     private Scene scene;
     private Stage stage;
 
-    EmulationParameters emulationParameters = EmulationParameters.getInstance();
+    private final EmulationParameters emulationParameters = EmulationParameters.getInstance();
     public void initializeTextFields() {
         initializeTextField(numberOfPredators, emulationParameters.getNumberOfPredators());
         initializeTextField(predatorsMaxEnergy, emulationParameters.getPredatorsMaxEnergy());
