@@ -34,18 +34,18 @@
          </font>
       </Label>
       <TextField fx:id="fieldWidth" layoutX="966.0" layoutY="341.0" prefHeight="30.0" prefWidth="149.0" promptText="8" />
-      <Label layoutX="396.0" layoutY="493.0" text="Number of individuals: " textFill="WHITE">
-         <font>
-            <Font size="29.0" />
-         </font>
-      </Label>
-      <TextField fx:id="numberOfIndividuals" layoutX="729.0" layoutY="501.0" prefHeight="30.0" prefWidth="149.0" promptText="20" />
       <Label layoutX="329.0" layoutY="414.0" text="Number of ecosystem life-tacts: " textFill="WHITE">
          <font>
             <Font size="29.0" />
          </font>
       </Label>
       <TextField fx:id="lifeTacts" layoutX="796.0" layoutY="422.0" prefHeight="30.0" prefWidth="149.0" promptText="10" />
+      <Label layoutX="396.0" layoutY="493.0" text="Number of individuals: " textFill="WHITE">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <TextField fx:id="numberOfIndividuals" layoutX="729.0" layoutY="501.0" prefHeight="30.0" prefWidth="149.0" promptText="20" />
       <ImageView fitHeight="289.0" fitWidth="162.0">
          <image>
             <Image url="@../../../media/fox2.png" />

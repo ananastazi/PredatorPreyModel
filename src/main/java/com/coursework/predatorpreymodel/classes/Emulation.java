@@ -21,7 +21,7 @@ public class Emulation {
     }
 
     public void prepareEmulation() {
-        playField.setPlayField(emulationParameters.getFieldWidth(), emulationParameters.getFieldHeight());
+        playField.setPlayField(emulationParameters.getFieldHeight(), emulationParameters.getFieldWidth());
         cellsFieldPlacing();
         individualsFieldPlacing();
     }
@@ -32,8 +32,9 @@ public class Emulation {
         this.grass = new ArrayList<>();
         for (int i = 0; i < emulationParameters.getNumberOfGrass(); ++i) {
             pos = uniquePositionGenerator.GetNewPos();
-            grass.add(new Grass(pos, i));
+            grass.add(new Grass(pos, UniqueIdGenerator.getInstance().getNewUniqueId()));
             playField.getField().get(pos.getX()).get(pos.getY()).setTypeOfCell(1);
+            playField.getField().get(pos.getX()).get(pos.getY()).setGrass(grass.get(grass.size() - 1));
         }
     }
     void individualsFieldPlacing() {
@@ -43,20 +44,47 @@ public class Emulation {
         preys = new ArrayList<>();
         for (int i = 0; i < emulationParameters.getNumberOfPredators(); ++i) {
             pos = uniquePositionGenerator.GetNewPos();
-            predators.add(new Predator(i, pos, emulationParameters.getPredatorsEnergy(), emulationParameters.getPredatorsCriticalEnergy(), emulationParameters.getPredatorsLifespan(), emulationParameters.getPredatorsSearchRadius()));
+            predators.add(new Predator(UniqueIdGenerator.getInstance().getNewUniqueId(), pos, emulationParameters.getPredatorsEnergy(), emulationParameters.getPredatorsCriticalEnergy(), emulationParameters.getPredatorsLifespan(), emulationParameters.getPredatorsSearchRadius()));
             playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(predators.get(predators.size() - 1));
         }
         for (int i = 0; i < emulationParameters.getNumberOfPreys(); ++i) {
             pos = uniquePositionGenerator.GetNewPos();
-            preys.add(new Prey(i, pos, emulationParameters.getPreysEnergy(), emulationParameters.getPreysCriticalEnergy(), emulationParameters.getPreysLifespan(), emulationParameters.getPreysSearchRadius()));
+            preys.add(new Prey(UniqueIdGenerator.getInstance().getNewUniqueId(), pos, emulationParameters.getPreysEnergy(), emulationParameters.getPreysCriticalEnergy(), emulationParameters.getPreysLifespan(), emulationParameters.getPreysSearchRadius()));
             playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(preys.get(preys.size() - 1));
         }
     }
 
     public void performTact() {
+        System.out.println("Predators alive: " + getPredatorsAlive());
+        System.out.println("Preys alive: " + getPreysAlive());
+        System.out.println();
         for (Predator predator : predators) {
             predator.act();
         }
+        for (Prey prey : preys) {
+            prey.act();
+        }
+        for (Grass oneGrass : grass) {
+            oneGrass.act();
+        }
+    }
+
+    public Integer getPredatorsAlive() {
+        Integer res = 0;
+        for (Predator predator : predators) {
+            if (predator.state)
+                res++;
+        }
+        return res;
+    }
+
+    public Integer getPreysAlive() {
+        Integer res = 0;
+        for (Prey prey : preys) {
+            if (prey.state)
+                res++;
+        }
+        return res;
     }
 
     // region Getters/Setters

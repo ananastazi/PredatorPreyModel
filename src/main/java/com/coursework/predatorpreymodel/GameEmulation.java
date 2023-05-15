@@ -107,6 +107,12 @@ public class GameEmulation {
     }
 
     private void UpdateScene() {
+        String ANSI_RESET = "\u001B[0m";
+        String ANSI_BLACK = "\u001B[30m";
+        String ANSI_RED = "\u001B[31m";
+        String ANSI_GREEN = "\u001B[32m";
+
+        System.out.println("Current field is:");
         PlayField playField = emulation.getPlayField();
         for (int i = 0; i < playField.getHeight(); ++i) {
             for (int j = 0; j < playField.getWidth(); ++j) {
@@ -114,21 +120,32 @@ public class GameEmulation {
                 switch (cell.getTypeOfCell()) {
                     case 0:
                         // set ground Image to pane
+                        System.out.print(ANSI_RESET);
                         break;
                     case 1:
                         // set grass Image to pane
+                        System.out.print(ANSI_GREEN);
                         break;
                     default:
                         break;
                 }
 
+                if (cell.getIndividual() == null) {
+                    System.out.print(0 + " ");
+                    continue;
+                }
+
                 if (cell.getIndividual().getClass() == Predator.class) {
+                    System.out.print(2);
                     // set image inside the pane
                 }
                 if (cell.getIndividual().getClass() == Prey.class) {
+                    System.out.print(1);
                     // set image inside the pane
                 }
             }
+            System.out.println(ANSI_RESET);
         }
+        System.out.println();
     }
 }

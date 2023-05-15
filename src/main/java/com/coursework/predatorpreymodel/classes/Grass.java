@@ -8,12 +8,13 @@ public class Grass {
     protected Integer id;
     protected Boolean state = true;
     protected Integer deathtimeTacts;
-
+    private Integer causeOfDeath; // cause of death: 2 - got eaten
     public Grass(Position pos, Integer id) {
         this.pos = pos;
         this.id = id;
     }
 
+    // region Getters/Setters
     public Position getPos() {
         return pos;
     }
@@ -45,11 +46,28 @@ public class Grass {
     public void setDeathtimeTacts(Integer deathtimeTacts) {
         this.deathtimeTacts = deathtimeTacts;
     }
+    // endregion
 
-    //grass renew with some probability
+    public void act() {
+        if (!state) {
+            this.deathtimeTacts++;
+            renewState();
+        }
+    }
+
+    Random rand = new Random();
+    // grass renew with some probability
     void renewState() { //or with parameter rand
-        Random rand = new Random();
         if (deathtimeTacts > 3 && (rand.nextInt() % (6 - deathtimeTacts) == 0))
             this.state = true;
+    }
+
+    public void dieFrom(Integer causeOfDeath) {
+        System.out.println("The " + this.getClass() + " with id: " + this.id + " (" + this.pos.getX() + ", " + this.pos.getY() + ") - died due to " + causeOfDeath);        System.out.println(causeOfDeath);
+        this.causeOfDeath = causeOfDeath;
+        this.state = false;
+        this.deathtimeTacts = 0;
+        PlayField.getInstance().getField().get(this.pos.getX()).get(this.pos.getY()).setGrass(null); // this deletes grass from the cell
+        PlayField.getInstance().getField().get(this.pos.getX()).get(this.pos.getY()).setTypeOfCell(0); // this deletes grass from the cell
     }
 }

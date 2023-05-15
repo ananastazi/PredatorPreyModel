@@ -32,6 +32,7 @@ public class EmulationParameters {
     }
     public void setEmulationParametersSpecies(String numberOfPredators, String predatorsMaxEnergy, String predatorsCriticalEnergy, String predatorsLifespan, String numberOfPreys, String preysMaxEnergy, String preysCriticalEnergy, String preysLifespan) {
         this.numberOfPredators = setNumber(numberOfPredators, numberOfIndividuals * 2 / 5);
+        System.out.println(this.numberOfPredators);
         this.predatorsCriticalEnergy = setNumber(predatorsCriticalEnergy, 2);
         this.predatorsMaxEnergy = setNumber(predatorsMaxEnergy, this.predatorsCriticalEnergy + 10);
         this.predatorsEnergy = this.predatorsCriticalEnergy + min(10, (this.predatorsMaxEnergy - this.predatorsCriticalEnergy) / 2);
@@ -39,7 +40,7 @@ public class EmulationParameters {
         this.numberOfPreys = setNumber(numberOfPreys, min(6, numberOfIndividuals - this.numberOfPredators));
         this.preysCriticalEnergy = setNumber(preysCriticalEnergy, 2);
         this.preysMaxEnergy = setNumber(preysMaxEnergy, this.preysCriticalEnergy + 10);
-        this.preysEnergy = this.preysCriticalEnergy + min(3, (this.preysMaxEnergy - this.preysCriticalEnergy) / 2);
+        this.preysEnergy = this.preysCriticalEnergy + min(5, (this.preysMaxEnergy - this.preysCriticalEnergy) / 2);
         this.preysLifespan = setNumber(preysLifespan, 5);
     }
 

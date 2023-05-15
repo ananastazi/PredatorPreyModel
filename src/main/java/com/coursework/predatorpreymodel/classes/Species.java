@@ -1,33 +1,34 @@
 package com.coursework.predatorpreymodel.classes;
 
+import eu.hansolo.toolbox.tuples.Pair;
 import javafx.geometry.Pos;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.text.ParsePosition;
+import java.util.*;
 
 public abstract class Species {
     protected Integer id;
     protected Position pos;
-    protected Position target;
+    protected Pair<Position, Integer> target = null; // target position and id
     protected Integer typeOfTarget; // 0 - prey; 1 - prey/partner; 2 - partner;
-    protected ArrayList<Position> workaround;
+    protected List<Position> workaround = null;
     protected Integer criticalEnergy;
     protected Integer energy;
     protected Integer maxEnergy;
-    protected Integer amountOfEnergyForReproduction;
-    protected Integer amountOfEnergyForMovement;
+    protected Integer amountOfEnergyForReproduction = 6;
+    protected Integer amountOfEnergyForMovement = 1;
     protected Integer lifetimeTacts;
-    protected Integer state;
-    protected Integer currentAge;
-    protected Integer causeOfdeath; // cause of death: 0 - from age, 1 - from hunger, 2 - eaten
+    protected Boolean state = true;
+    protected Integer currentAge = 1;
+    protected Integer causeOfDeath; // cause of death: 0 - from age, 1 - from hunger, 2 - got eaten
     protected Integer searchRadius;
 
-    public Species(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts, Integer searchRadius) {
+    public Species(Integer id, Position pos, Integer maxEnergy, Integer criticalEnergy, Integer lifetimeTacts, Integer searchRadius) {
         this.id = id;
         this.pos = pos;
         this.criticalEnergy = criticalEnergy;
-        this.energy = energy;
+        this.maxEnergy = maxEnergy;
+        this.energy = criticalEnergy + 4;
         this.lifetimeTacts = lifetimeTacts;
         this.searchRadius = searchRadius;
     }
@@ -35,10 +36,6 @@ public abstract class Species {
     // region Getters/Setters
     public Integer getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public Position getPos() {
@@ -49,11 +46,11 @@ public abstract class Species {
         this.pos = pos;
     }
 
-    public Position getTarget() {
+    public Pair<Position, Integer> getTarget() {
         return target;
     }
 
-    public void setTarget(Position target) {
+    public void setTarget(Pair<Position, Integer> target) {
         this.target = target;
     }
 
@@ -77,61 +74,37 @@ public abstract class Species {
         return criticalEnergy;
     }
 
-    public void setCriticalEnergy(Integer criticalEnergy) {
-        this.criticalEnergy = criticalEnergy;
-    }
-
     public Integer getAmountOfEnergyForReproduction() {
         return amountOfEnergyForReproduction;
-    }
-
-    public void setAmountOfEnergyForReproduction(Integer amountOfEnergyForReproduction) {
-        this.amountOfEnergyForReproduction = amountOfEnergyForReproduction;
     }
 
     public Integer getLifetimeTacts() {
         return lifetimeTacts;
     }
 
-    public void setLifetimeTacts(Integer lifetimeTacts) {
-        this.lifetimeTacts = lifetimeTacts;
-    }
-
-    public Integer getState() {
+    public Boolean getState() {
         return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
     }
 
     public Integer getCurrentAge() {
         return currentAge;
     }
 
-    public void setCurrentAge(Integer currentAge) {
-        this.currentAge = currentAge;
-    }
-
     public Integer getMaxEnergy() {
         return maxEnergy;
     }
 
-    public void setMaxEnergy(Integer maxEnergy) {
-        this.maxEnergy = maxEnergy;
-    }
 
-    public ArrayList<Position> getWorkaround() {
-        return workaround;
-    }
-
-    public Integer getCauseOfdeath() {
-        return causeOfdeath;
+    public Integer getCauseOfDeath() {
+        return causeOfDeath;
     }
     // endregion
 
     public void act() {
-        if (this.currentAge >= this.lifetimeTacts) {
+        if (!state)
+            return;
+        System.out.println("here we are acting " + id + ": " + pos.getX() + " " + pos.getY());
+        if (this.currentAge > this.lifetimeTacts) {
             this.dieFrom(0);
         }
         else if (this.energy < this.criticalEnergy) {
@@ -146,11 +119,37 @@ public abstract class Species {
         else {
             this.typeOfTarget = 2;
         }
-
+        currentAge++;
+        System.out.println("targeting");
         this.searchTarget();
+        if (target != null)
+            System.out.println("target is " + target.getA().getX() + " " + target.getA().getY());
+        else
+            System.out.println("WHERE IS MY TARGET");
+
+        this.doStep();
+        System.out.println("Step is done");
+        System.out.println();
     }
 
-    public abstract void move();
+    protected abstract void move();
+
+    protected void moveRandomly(int[] rowNum, int[] colNum ) { // if the predator goes in diagonal
+        for (int i = 0; i < rowNum.length; i++) {
+            if (PlayField.getInstance().getHeight() >= this.pos.getX() + rowNum[i] || this.pos.getX() + rowNum[i] < 0)
+                continue;
+            if (PlayField.getInstance().getWidth() >= this.pos.getY() + colNum[i] || this.pos.getY() + colNum[i] < 0)
+                continue;
+
+            Cell cell = PlayField.getInstance().getField().get(this.pos.getX() + rowNum[i]).get(this.pos.getY() + colNum[i]);
+            if (cell.getIndividual() == null) {
+                PlayField.getInstance().getField().get(this.pos.getX()).get(this.pos.getY()).setIndividual(null); // this moves from the cell
+                cell.setIndividual(this); // this moves to the cell
+                this.energy -= this.amountOfEnergyForMovement;
+                break;
+            }
+        }
+    }
 
     public abstract void doStep();
 
@@ -166,22 +165,28 @@ public abstract class Species {
 
         Queue<Position> queue = new LinkedList<>();
 
+        Position visitCell = new Position(this.pos.getX(), this.pos.getY());
         localMatrix[this.pos.getX()][this.pos.getY()] = 0;
-        queue.add(new Position(this.pos.getX(), this.pos.getY()));
+        queue.add(visitCell);
 
-        int rowNum[] = {-1, 0, 0, 1};
-        int colNum[] = {0, -1, 1, 0};
+        int[] rowNum = {-1, 0, 0, 1};
+        int[] colNum = {0, -1, 1, 0};
 
-        Boolean isTargetFound = false;
-        Position visitCell =  new Position(-1, -1);
-
+        boolean isTargetFound = false;
+        Pair <Integer, Integer> lastCheck = CheckCell(visitCell, 0);
+        if (lastCheck.getA() == 1)
+            isTargetFound = true;
         for (int  i = 0; i < this.searchRadius && !isTargetFound; ++i) {
             int qSize = queue.size();
+            System.out.print(i + " " + qSize + ", ");
             for (int k = 0; !queue.isEmpty() && k < qSize && !isTargetFound; ++k) {
                 for (int j = 0; j < rowNum.length && !isTargetFound; j++) {
                     visitCell = new Position(queue.element().getX() + rowNum[j], queue.element().getY() + colNum[j]);
-                    if (localMatrix[visitCell.getX()][visitCell.getY()] == -1) {
-                        switch(CheckCell(visitCell, i)) {
+                    if (visitCell.getX() < localMatrix.length && visitCell.getX() >= 0
+                            && visitCell.getY() < localMatrix[0].length && visitCell.getY() >= 0 // if the cell is inside the matrix
+                            && localMatrix[visitCell.getX()][visitCell.getY()] == -1) {
+                        lastCheck = CheckCell(visitCell, i);
+                        switch(lastCheck.getA()) {
                             case -1:
                                 localMatrix[visitCell.getX()][visitCell.getY()] = -2;
                                 break;
@@ -200,24 +205,37 @@ public abstract class Species {
             }
         }
 
-        workaround = new ArrayList<>();
+        if (!isTargetFound) {
+            this.target = null;
+            this.workaround = null;
+            return;
+        }
+
+        this.target = new Pair<>(visitCell, lastCheck.getB());
+
+        this.workaround = new ArrayList<>();
+        this.workaround.add(new Position(visitCell.getX(), visitCell.getY()));
         for (int i = localMatrix[visitCell.getX()][visitCell.getY()]; i > 0; --i) {
             for (int j = 0; j < rowNum.length; j++) {
-                if (localMatrix[workaround.get(workaround.size() - 1).getX() + rowNum[j]][workaround.get(workaround.size() - 1).getY() + colNum[j]] == (i - 1)) {
-                    workaround.add(new Position(i + rowNum[j], j + colNum[j]));
+                if (workaround.get(workaround.size() - 1).getX() + rowNum[j] < localMatrix.length && workaround.get(workaround.size() - 1).getX() + rowNum[j] >= 0
+                        && workaround.get(workaround.size() - 1).getY() + colNum[j] < localMatrix[0].length && workaround.get(workaround.size() - 1).getY() + colNum[j] >= 0 // if the cell is inside the matrix
+                        && localMatrix[workaround.get(workaround.size() - 1).getX() + rowNum[j]][workaround.get(workaround.size() - 1).getY() + colNum[j]] == (i - 1)) {
+                    workaround.add(new Position(workaround.get(workaround.size() - 1).getX() + rowNum[j], workaround.get(workaround.size() - 1).getY() + colNum[j]));
                     break;
                 }
             }
         }
     }
-    protected abstract Integer CheckCell(Position pos, Integer distance);
+    protected abstract Pair<Integer, Integer> CheckCell(Position pos, Integer distance);
 
     public void createOffspring() {
 
     }
 
-    public void dieFrom(Integer causeOfdeath) {
-        this.causeOfdeath = causeOfdeath;
-        this.state = 0;
+    public void dieFrom(Integer causeOfDeath) {
+        System.out.println("The " + this.getClass() + " with id: " + this.id + " (" + this.pos.getX() + ", " + this.pos.getY() + ") - died due to " + causeOfDeath);
+        this.causeOfDeath = causeOfDeath;
+        this.state = false;
+        PlayField.getInstance().getField().get(this.pos.getX()).get(this.pos.getY()).setIndividual(null); // this deletes individual from the cell
     }
 }

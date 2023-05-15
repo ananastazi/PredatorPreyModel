@@ -12,12 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static java.lang.Math.min;
-import static java.lang.Math.unsignedMultiplyHigh;
 
 public class ParametersInputSpecies {
     @FXML
@@ -139,16 +135,16 @@ public class ParametersInputSpecies {
                 numberOfPredators.getText().length() == 0) &&
                 numberOfPreys.getText() != null &&
                 numberOfPreys.getText().length() != 0)
-                numberOfPredators.setText(String.valueOf(
-                        min(
-                                Integer.parseInt(numberOfPreys.getText()) / 2,
-                                (emulationParameters.getNumberOfIndividuals() - Integer.parseInt(numberOfPreys.getText()))) / 2
-                ));
+            numberOfPredators.setText(String.valueOf(
+                    min(
+                            Integer.parseInt(numberOfPreys.getText()) / 2,
+                            (emulationParameters.getNumberOfIndividuals() - Integer.parseInt(numberOfPreys.getText()))) / 2
+            ));
         if (numberOfPredators.getText() != null &&
                 numberOfPredators.getText().length() != 0 &&
                 (numberOfPreys.getText() == null ||
                 numberOfPreys.getText().length() == 0))
-            numberOfPredators.setText(String.valueOf(
+            numberOfPreys.setText(String.valueOf(
                     min(
                             Integer.parseInt(numberOfPredators.getText()) * 2,
                             (emulationParameters.getNumberOfIndividuals() - Integer.parseInt(numberOfPredators.getText()))) / 2
@@ -167,7 +163,6 @@ public class ParametersInputSpecies {
                 preysCriticEnergy.getText().length() != 0 &&
                 Integer.parseInt(preysCriticEnergy.getText()) > Integer.parseInt(preysMaxEnergy.getText()))
             return "Text field 'Predator max energy' must be bigger than text field 'Predator critical energy'";
-
         return "";
     }
 

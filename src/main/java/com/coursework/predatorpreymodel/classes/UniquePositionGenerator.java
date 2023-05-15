@@ -1,11 +1,12 @@
 package com.coursework.predatorpreymodel.classes;
 
+import javax.sound.midi.SysexMessage;
 import java.util.Random;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 
-public class UniquePositionGenerator {
+public class    UniquePositionGenerator {
     private Integer[] nodes;
     private Integer width;
     private Integer height;
@@ -13,24 +14,33 @@ public class UniquePositionGenerator {
 
     // initializing nodes with numbers from 1 to width * length
     // addition 1st element, elements of matrix, addition last element
-    public UniquePositionGenerator(Integer width, Integer height) {
-        this.width = width;
+    public UniquePositionGenerator(Integer height, Integer width) {
         this.height = height;
+        this.width = width;
         nodes = new Integer[height * width];
         for (int i = 0; i < nodes.length; i++) {
             nodes[i] = i;
         }
     }
+    public void Print() {
+        for (int i = 0; i < nodes.length; i++) {
+            if (i % width == 0)
+                System.out.println();
+            System.out.print(nodes[i] + ", ");
+        }
+        System.out.println();
+    }
     public Position GetNewPos() {
-        Integer rndIndex = Root(random.nextInt(nodes.length));
+        int num = random.nextInt(nodes.length);
+        int rndIndex = Root(num);
         Union(rndIndex, (rndIndex + 1) % nodes.length);
         return new Position(rndIndex / width, rndIndex % width);
     }
 
     // find the root of nodes[x] which is presented as a tree;
-    private Integer Root(Integer x)
+    private int Root(Integer x)
     {
-        Integer res = nodes[x];
+        int res = nodes[x];
         while (res != nodes[res])
         {
             nodes[res] = nodes[nodes[res]];
@@ -44,6 +54,6 @@ public class UniquePositionGenerator {
     {
         int rootX = Root(x);
         int rootY = Root(y);
-        nodes[max(rootX, rootY)] = min(rootX, rootY);
+        nodes[rootX] = rootY;
     }
 }

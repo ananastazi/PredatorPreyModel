@@ -114,7 +114,7 @@ public class ParametersInputField {
                 fieldHeight.setText("10");
             if (fieldWidth.getText() == null || fieldWidth.getText().length() == 0)
                 fieldWidth.setText("10");
-            numberOfIndividuals.setText(String.valueOf(Integer.parseInt(fieldHeight.getText()) * Integer.parseInt(fieldWidth.getText())));
+            numberOfIndividuals.setText(String.valueOf(Integer.parseInt(fieldHeight.getText()) * Integer.parseInt(fieldWidth.getText()) / 4));
         }
         else {
             if (height == -1 && width == -1) {
