@@ -38,7 +38,7 @@ public class Predator extends Species {
             return;
         }
 
-        if (this.pos.getDistance(this.target.getA()) != 1)
+        if (this.pos.getDistance(this.target.getA()) > 1)
             this.move();
 
         if (this.pos.getDistance(this.target.getA()) <= 1) {
@@ -46,8 +46,8 @@ public class Predator extends Species {
                 this.eatPrey();
             }
             if (this.typeOfTarget == 1) {
-                if (PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getGrass() != null
-                        && target.getB() == PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getGrass().getId())
+                if (PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getIndividual() != null
+                        && target.getB() == PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getIndividual().getId())
                     this.eatPrey();
                 if (target.getB() == PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getIndividual().getId())
                     this.createOffspring();
