@@ -2,6 +2,7 @@ package com.coursework.predatorpreymodel.classes;
 
 import eu.hansolo.fx.countries.tools.CRegion;
 
+import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 public class EmulationParameters {
@@ -26,18 +27,17 @@ public class EmulationParameters {
     public void setEmulationParametersField(String fieldHeight, String fieldWidth, String numberOfIndividuals, String lifeTacts) {
         this.fieldWidth = setNumber(fieldWidth, 10);
         this.fieldHeight = setNumber(fieldHeight, 10);
-        this.numberOfIndividuals = setNumber(numberOfIndividuals, this.fieldHeight * this.fieldWidth / 4);
+        this.numberOfIndividuals = setNumber(numberOfIndividuals, this.fieldHeight * this.fieldWidth / 6);
         this.lifeTacts = setNumber(lifeTacts, 10);
         this.numberOfGrass = this.fieldHeight * this.fieldWidth;
     }
     public void setEmulationParametersSpecies(String numberOfPredators, String predatorsMaxEnergy, String predatorsCriticalEnergy, String predatorsLifespan, String numberOfPreys, String preysMaxEnergy, String preysCriticalEnergy, String preysLifespan) {
-        this.numberOfPredators = setNumber(numberOfPredators, numberOfIndividuals * 2 / 5);
-        System.out.println(this.numberOfPredators);
+        this.numberOfPredators = setNumber(numberOfPredators, numberOfIndividuals / 4);
         this.predatorsCriticalEnergy = setNumber(predatorsCriticalEnergy, 2);
         this.predatorsMaxEnergy = setNumber(predatorsMaxEnergy, this.predatorsCriticalEnergy + 10);
         this.predatorsEnergy = this.predatorsCriticalEnergy + min(10, (this.predatorsMaxEnergy - this.predatorsCriticalEnergy) / 2);
         this.predatorsLifespan = setNumber(predatorsLifespan, 7);
-        this.numberOfPreys = setNumber(numberOfPreys, min(6, numberOfIndividuals - this.numberOfPredators));
+        this.numberOfPreys = setNumber(numberOfPreys, max(this.numberOfPredators * 2, numberOfIndividuals / 2));
         this.preysCriticalEnergy = setNumber(preysCriticalEnergy, 2);
         this.preysMaxEnergy = setNumber(preysMaxEnergy, this.preysCriticalEnergy + 10);
         this.preysEnergy = this.preysCriticalEnergy + min(5, (this.preysMaxEnergy - this.preysCriticalEnergy) / 2);

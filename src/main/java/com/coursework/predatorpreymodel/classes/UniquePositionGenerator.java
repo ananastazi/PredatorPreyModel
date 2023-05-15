@@ -22,14 +22,7 @@ public class    UniquePositionGenerator {
             nodes[i] = i;
         }
     }
-    public void Print() {
-        for (int i = 0; i < nodes.length; i++) {
-            if (i % width == 0)
-                System.out.println();
-            System.out.print(nodes[i] + ", ");
-        }
-        System.out.println();
-    }
+
     public Position GetNewPos() {
         int num = random.nextInt(nodes.length);
         int rndIndex = Root(num);

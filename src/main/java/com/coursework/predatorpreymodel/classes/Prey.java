@@ -10,32 +10,15 @@ public class Prey extends Species {
     }
 
     @Override
-    public  void move() {
-        if (workaround != null && workaround.size() > 1) {
-            Position nextPos = workaround.get(workaround.size() - 2);
-            if (PlayField.getInstance().getField().get(nextPos.getX()).get(nextPos.getY()).getIndividual() == null) {
-                System.out.println("actual move");
-                PlayField.getInstance().getField().get(pos.getX()).get(pos.getY()).setIndividual(null); // this moves from the cell
-                pos = nextPos; // this moves to the cell
-                PlayField.getInstance().getField().get(pos.getX()).get(pos.getY()).setIndividual(this); // because our pos has been changed
-                this.energy -= this.amountOfEnergyForMovement;
-            }
-        }
-    }
-
-    @Override
     public void doStep() {
         if (this.target == null) {
-            System.out.println("move at least randomly, please");
             int[] rowNum = {-1, 0, 0, 1};
             int[] colNum = {0, -1, 1, 0};
-            System.out.println("random move !!!!");
             this.moveRandomly(rowNum, colNum);
             return;
         }
 
         if (this.pos.getDistance(this.target.getA()) > 0) {
-            System.out.println("ordinary move !!!!");
             this.move();
         }
 

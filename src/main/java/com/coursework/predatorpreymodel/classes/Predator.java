@@ -1,5 +1,6 @@
 package com.coursework.predatorpreymodel.classes;
 
+import com.coursework.predatorpreymodel.AlertBox;
 import eu.hansolo.toolbox.tuples.Pair;
 
 import java.util.ArrayList;
@@ -18,12 +19,14 @@ public class Predator extends Species {
     @Override
     // Probably going to move in diagonal
     public  void move() {
-        if (this.workaround != null && this.workaround.size() > 0) {
-            Position nextPos = this.workaround.get(this.workaround.size() - 1);
-            if (PlayField.getInstance().getField().get(nextPos.getX()).get(nextPos.getY()).getIndividual() == null) {
+        if (this.workaround != null && this.workaround.size() > 1) {
+            Position nextPos = this.workaround.get(this.workaround.size() - 2);
+            Cell nextCell = PlayField.getInstance().getField().get(nextPos.getX()).get(nextPos.getY());
+            if (nextCell.getIndividual() == null) {
                 PlayField.getInstance().getField().get(pos.getX()).get(pos.getY()).setIndividual(null); // this moves from the cell
+                QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(pos, nextPos))); // adding change to the queue
                 pos = nextPos; // this moves to the cell
-                PlayField.getInstance().getField().get(pos.getX()).get(pos.getY()).setIndividual(this); // because our pos has been changed
+                nextCell.setIndividual(this); // to adjust the field
                 this.energy -= this.amountOfEnergyForMovement;
             }
         }
@@ -41,15 +44,16 @@ public class Predator extends Species {
         if (this.pos.getDistance(this.target.getA()) > 1)
             this.move();
 
-        if (this.pos.getDistance(this.target.getA()) <= 1) {
+        if (this.pos.getDistance(this.target.getA()) == 1) {
             if (this.typeOfTarget == 0) {
                 this.eatPrey();
             }
             if (this.typeOfTarget == 1) {
-                if (PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getIndividual() != null
-                        && target.getB() == PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getIndividual().getId())
+                if (PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getIndividual() == null)
+                    AlertBox.display("no-no-no. There is target and no individual in cell");
+                if (PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getIndividual().getClass() == Prey.class)
                     this.eatPrey();
-                if (target.getB() == PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getIndividual().getId())
+                else
                     this.createOffspring();
             }
             if (this.typeOfTarget == 2) {

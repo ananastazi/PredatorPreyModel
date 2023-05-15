@@ -1,6 +1,7 @@
 package com.coursework.predatorpreymodel.classes;
 
-import javafx.util.Pair;
+import eu.hansolo.toolbox.tuples.Pair;
+
 import java.util.Random;
 
 public class Grass {
@@ -58,16 +59,19 @@ public class Grass {
     Random rand = new Random();
     // grass renew with some probability
     void renewState() { //or with parameter rand
-        if (deathtimeTacts > 3 && (rand.nextInt() % (6 - deathtimeTacts) == 0))
+        if (deathtimeTacts > 3 && (rand.nextInt() % (6 - deathtimeTacts) == 0)) {
             this.state = true;
+            QueueOfChanges.getInstance().add(new Pair<>(0, new Pair<>(null, pos))); // adding change to the queue
+        }
     }
 
     public void dieFrom(Integer causeOfDeath) {
-        System.out.println("The " + this.getClass() + " with id: " + this.id + " (" + this.pos.getX() + ", " + this.pos.getY() + ") - died due to " + causeOfDeath);        System.out.println(causeOfDeath);
+        System.out.println("The " + this.getClass() + " with id: " + this.id + " (" + this.pos.getX() + ", " + this.pos.getY() + ") - died due to " + causeOfDeath);
         this.causeOfDeath = causeOfDeath;
         this.state = false;
         this.deathtimeTacts = 0;
         PlayField.getInstance().getField().get(this.pos.getX()).get(this.pos.getY()).setGrass(null); // this deletes grass from the cell
         PlayField.getInstance().getField().get(this.pos.getX()).get(this.pos.getY()).setTypeOfCell(0); // this deletes grass from the cell
+        QueueOfChanges.getInstance().add(new Pair<>(0, new Pair<>(this.pos, null))); // adding change to the queue
     }
 }

@@ -1,5 +1,6 @@
 package com.coursework.predatorpreymodel.classes;
 
+import eu.hansolo.toolbox.tuples.Pair;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -35,6 +36,7 @@ public class Emulation {
             grass.add(new Grass(pos, UniqueIdGenerator.getInstance().getNewUniqueId()));
             playField.getField().get(pos.getX()).get(pos.getY()).setTypeOfCell(1);
             playField.getField().get(pos.getX()).get(pos.getY()).setGrass(grass.get(grass.size() - 1));
+            QueueOfChanges.getInstance().add(new Pair<>(0, new Pair<>(null, pos))); // adding change to the queue
         }
     }
     void individualsFieldPlacing() {
@@ -45,12 +47,14 @@ public class Emulation {
         for (int i = 0; i < emulationParameters.getNumberOfPredators(); ++i) {
             pos = uniquePositionGenerator.GetNewPos();
             predators.add(new Predator(UniqueIdGenerator.getInstance().getNewUniqueId(), pos, emulationParameters.getPredatorsEnergy(), emulationParameters.getPredatorsCriticalEnergy(), emulationParameters.getPredatorsLifespan(), emulationParameters.getPredatorsSearchRadius()));
-            playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(predators.get(predators.size() - 1));
+            playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(predators.get(predators.size() - 1)); // adjusting the field
+            QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(null, pos))); // adding change to the queue
         }
         for (int i = 0; i < emulationParameters.getNumberOfPreys(); ++i) {
             pos = uniquePositionGenerator.GetNewPos();
             preys.add(new Prey(UniqueIdGenerator.getInstance().getNewUniqueId(), pos, emulationParameters.getPreysEnergy(), emulationParameters.getPreysCriticalEnergy(), emulationParameters.getPreysLifespan(), emulationParameters.getPreysSearchRadius()));
-            playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(preys.get(preys.size() - 1));
+            playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(preys.get(preys.size() - 1)); // adjusting the field
+            QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(null, pos))); // adding change to the queue
         }
     }
 

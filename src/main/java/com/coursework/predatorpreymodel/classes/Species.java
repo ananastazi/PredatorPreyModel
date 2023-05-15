@@ -103,12 +103,13 @@ public abstract class Species {
     public void act() {
         if (!state)
             return;
-        System.out.println("here we are acting " + id + ": " + pos.getX() + " " + pos.getY());
         if (this.currentAge > this.lifetimeTacts) {
             this.dieFrom(0);
+            return;
         }
         else if (this.energy < this.criticalEnergy) {
             this.dieFrom(1);
+            return;
         }
         else if (this.energy < this.amountOfEnergyForReproduction) {
             this.typeOfTarget = 0;
@@ -120,31 +121,41 @@ public abstract class Species {
             this.typeOfTarget = 2;
         }
         currentAge++;
-        System.out.println("targeting");
         this.searchTarget();
-        if (target != null)
-            System.out.println("target is " + target.getA().getX() + " " + target.getA().getY());
-        else
-            System.out.println("WHERE IS MY TARGET");
 
         this.doStep();
-        System.out.println("Step is done");
-        System.out.println();
     }
 
-    protected abstract void move();
+    protected void move() {
+        if (workaround != null && this.workaround.size() > 1) {
+            Position nextPos = this.workaround.get(this.workaround.size() - 2);
+            Cell nextCell = PlayField.getInstance().getField().get(nextPos.getX()).get(nextPos.getY());
+            if (nextCell.getIndividual() == null) {
+                PlayField.getInstance().getField().get(this.pos.getX()).get(this.pos.getY()).setIndividual(null); // this moves from the cell
+                QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(this.pos, nextPos))); // adding change to the queue
+                pos = nextPos; // this moves to the cell
+                nextCell.setIndividual(this); // to adjust the field
+                this.energy -= this.amountOfEnergyForMovement;
+            }
+        }
+    };
 
     protected void moveRandomly(int[] rowNum, int[] colNum ) { // if the predator goes in diagonal
-        for (int i = 0; i < rowNum.length; i++) {
-            if (PlayField.getInstance().getHeight() >= this.pos.getX() + rowNum[i] || this.pos.getX() + rowNum[i] < 0)
+        Random rnd = new Random();
+        int i = rnd.nextInt(4);
+        for (int j = 0; j < rowNum.length; j++) {
+            i++; i %= rowNum.length;
+            if (this.pos.getX() + rowNum[i] >= PlayField.getInstance().getHeight() || this.pos.getX() + rowNum[i] < 0)
                 continue;
-            if (PlayField.getInstance().getWidth() >= this.pos.getY() + colNum[i] || this.pos.getY() + colNum[i] < 0)
+            if (this.pos.getY() + colNum[i] >= PlayField.getInstance().getWidth() || this.pos.getY() + colNum[i] < 0)
                 continue;
-
-            Cell cell = PlayField.getInstance().getField().get(this.pos.getX() + rowNum[i]).get(this.pos.getY() + colNum[i]);
-            if (cell.getIndividual() == null) {
+            Position nextPos = new Position(this.pos.getX() + rowNum[i], this.pos.getY() + colNum[i]);
+            Cell nextCell = PlayField.getInstance().getField().get(nextPos.getX()).get(nextPos.getY());
+            if (nextCell.getIndividual() == null) {
                 PlayField.getInstance().getField().get(this.pos.getX()).get(this.pos.getY()).setIndividual(null); // this moves from the cell
-                cell.setIndividual(this); // this moves to the cell
+                QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(this.pos, nextPos))); // adding change to the queue
+                this.pos = nextPos; // this moves to the cell
+                nextCell.setIndividual(this); // to adjust the field
                 this.energy -= this.amountOfEnergyForMovement;
                 break;
             }
@@ -178,7 +189,6 @@ public abstract class Species {
             isTargetFound = true;
         for (int  i = 0; i < this.searchRadius && !isTargetFound; ++i) {
             int qSize = queue.size();
-            System.out.print(i + " " + qSize + ", ");
             for (int k = 0; !queue.isEmpty() && k < qSize && !isTargetFound; ++k) {
                 for (int j = 0; j < rowNum.length && !isTargetFound; j++) {
                     visitCell = new Position(queue.element().getX() + rowNum[j], queue.element().getY() + colNum[j]);
@@ -236,6 +246,7 @@ public abstract class Species {
         System.out.println("The " + this.getClass() + " with id: " + this.id + " (" + this.pos.getX() + ", " + this.pos.getY() + ") - died due to " + causeOfDeath);
         this.causeOfDeath = causeOfDeath;
         this.state = false;
+        QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(this.pos, null)));
         PlayField.getInstance().getField().get(this.pos.getX()).get(this.pos.getY()).setIndividual(null); // this deletes individual from the cell
     }
 }
