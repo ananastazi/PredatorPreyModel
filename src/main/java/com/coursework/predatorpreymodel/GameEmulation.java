@@ -122,12 +122,13 @@ public class GameEmulation {
                 new KeyFrame(Duration.seconds(1000), event -> { System.out.println("finished"); })
         );
 
-        for (int i = 0; i < QueueOfChanges.getInstance().size(); i++) {
+        int qSize = QueueOfChanges.getInstance().size();
+        for (int i = 0; i < qSize; i++) {
 //            timer.play();
 //            System.out.println("started");
             updateSceneOnce();
         }
-            AlertBox.display("...");
+        AlertBox.display("...");
     }
 
     private void updateSceneOnce() {
