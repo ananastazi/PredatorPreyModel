@@ -1,0 +1,21 @@
+.playfield {
+    -fx-grid-lines-visible: true;
+    -fx-border-color: white;
+    -fx-background-image: url('../../../../media/ground.jpg');
+}
+
+.tact-label {
+    -fx-text-fill: WHITE;
+    -fx-font-size: 36px;
+}
+
+.game-button {
+    -fx-font-size: 30px;
+}
+.game-button:hover {
+    -fx-background-color: rgba(200, 200, 200, 0.99);
+    -fx-cursor: HAND;
+}
+.speed-slider {
+    -fx-font-size: 24px;
+}

@@ -56,11 +56,12 @@ public class Grass {
         }
     }
 
-    Random rand = new Random();
     // grass renew with some probability
-    void renewState() { //or with parameter rand
-        if (deathtimeTacts > 3 && (rand.nextInt() % (6 - deathtimeTacts) == 0)) {
+    void renewState() {
+        Random rand = new Random();
+        if (deathtimeTacts > 3 && (rand.nextInt() % (8 - deathtimeTacts) == 0)) { // when the deathtimeTacts = 7, then the likelihood is 100%
             this.state = true;
+            PlayField.getInstance().getCell(pos).setTypeOfCell(1);
             QueueOfChanges.getInstance().add(new Pair<>(0, new Pair<>(null, pos))); // adding change to the queue
         }
     }

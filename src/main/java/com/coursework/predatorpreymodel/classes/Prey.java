@@ -4,8 +4,8 @@ import eu.hansolo.toolbox.tuples.Pair;
 
 public class Prey extends Species {
     protected Integer amountOfEnergyForGrass;
-    public Prey(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts, Integer searchRadius) {
-        super(id, pos, energy, criticalEnergy, lifetimeTacts, searchRadius);
+    public Prey(Builder builder, Integer id, Position pos, Integer criticalEnergy, Integer energy, Integer maxEnergy, Integer lifetimeTacts, Integer searchRadius) {
+        super(builder, id, pos, criticalEnergy, energy, maxEnergy, lifetimeTacts, searchRadius);
         this.amountOfEnergyForGrass = 3;
     }
 
@@ -23,11 +23,12 @@ public class Prey extends Species {
         }
 
         if (this.pos.getDistance(this.target.getA()) <= 1) {
-            if (this.typeOfTarget == 0) {
+            if (this.pos.equals(target.getA()) && this.typeOfTarget == 0) { // to make sure grass is located in the same cell
                 this.eatGrass();
             }
             if (this.typeOfTarget == 1) {
-                if (PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getGrass() != null
+                if (this.pos.equals(target.getA()) // to make sure grass is located in the same cell
+                        && PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getGrass() != null
                         && target.getB() == PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getGrass().getId())
                     this.eatGrass();
                 if (target.getB() == PlayField.getInstance().getField().get(target.getA().getX()).get(target.getA().getY()).getIndividual().getId())

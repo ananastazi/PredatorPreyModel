@@ -7,6 +7,7 @@ import java.text.ParsePosition;
 import java.util.*;
 
 public abstract class Species {
+    protected Builder builder;
     protected Integer id;
     protected Position pos;
     protected Pair<Position, Integer> target = null; // target position and id
@@ -23,12 +24,13 @@ public abstract class Species {
     protected Integer causeOfDeath; // cause of death: 0 - from age, 1 - from hunger, 2 - got eaten
     protected Integer searchRadius;
 
-    public Species(Integer id, Position pos, Integer maxEnergy, Integer criticalEnergy, Integer lifetimeTacts, Integer searchRadius) {
+    public Species(Builder builder, Integer id, Position pos, Integer criticalEnergy, Integer energy, Integer maxEnergy, Integer lifetimeTacts, Integer searchRadius) {
+        this.builder = builder;
         this.id = id;
         this.pos = pos;
         this.criticalEnergy = criticalEnergy;
         this.maxEnergy = maxEnergy;
-        this.energy = criticalEnergy + 4;
+        this.energy = energy;
         this.lifetimeTacts = lifetimeTacts;
         this.searchRadius = searchRadius;
     }
@@ -140,26 +142,33 @@ public abstract class Species {
         }
     };
 
-    protected void moveRandomly(int[] rowNum, int[] colNum ) { // if the predator goes in diagonal
-        Random rnd = new Random();
-        int i = rnd.nextInt(4);
-        for (int j = 0; j < rowNum.length; j++) {
-            i++; i %= rowNum.length;
-            if (this.pos.getX() + rowNum[i] >= PlayField.getInstance().getHeight() || this.pos.getX() + rowNum[i] < 0)
-                continue;
-            if (this.pos.getY() + colNum[i] >= PlayField.getInstance().getWidth() || this.pos.getY() + colNum[i] < 0)
-                continue;
-            Position nextPos = new Position(this.pos.getX() + rowNum[i], this.pos.getY() + colNum[i]);
-            Cell nextCell = PlayField.getInstance().getField().get(nextPos.getX()).get(nextPos.getY());
-            if (nextCell.getIndividual() == null) {
-                PlayField.getInstance().getField().get(this.pos.getX()).get(this.pos.getY()).setIndividual(null); // this moves from the cell
-                QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(this.pos, nextPos))); // adding change to the queue
-                this.pos = nextPos; // this moves to the cell
-                nextCell.setIndividual(this); // to adjust the field
-                this.energy -= this.amountOfEnergyForMovement;
-                break;
-            }
+    protected void moveRandomly(int[] rowNum, int[] colNum) { // if the predator goes in diagonal
+        Position nextPos = getRandomCell(rowNum, colNum);
+        if (nextPos != null) {
+            PlayField.getInstance().getCell(this.pos).setIndividual(null); // this moves from the cell
+            QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(this.pos, nextPos))); // adding change to the queue
+            this.pos = nextPos; // this moves to the cell
+            PlayField.getInstance().getCell(nextPos).setIndividual(this); // to adjust the field
+            this.energy -= this.amountOfEnergyForMovement;
         }
+    }
+
+    private Position getRandomCell(int[] rowNum, int[] colNum ) {
+        Random rnd = new Random();
+        int i = rnd.nextInt(rowNum.length);
+        for (int j = 0; j < rowNum.length; j++) {
+            i++;
+            i %= rowNum.length;
+            Position nextPos = new Position(this.pos.getX() + rowNum[i], this.pos.getY() + colNum[i]);
+            if (nextPos.getX() >= PlayField.getInstance().getHeight() || nextPos.getX() < 0)
+                continue;
+            if (nextPos.getY() >= PlayField.getInstance().getWidth() || nextPos.getY() < 0)
+                continue;
+            Cell nextCell = PlayField.getInstance().getCell(nextPos);
+            if (nextCell.getIndividual() == null)
+                return nextPos;
+        }
+        return null;
     }
 
     public abstract void doStep();
@@ -239,7 +248,28 @@ public abstract class Species {
     protected abstract Pair<Integer, Integer> CheckCell(Position pos, Integer distance);
 
     public void createOffspring() {
+        int[] rowNum, colNum;
+        if (this.pos.getX() == target.getA().getX()) {
+            int sideShift = target.getA().getY() - this.pos.getY(); // if the target is to the right, then this will be 1. if to the left, then -1
+            rowNum = new int[] { 1, 1, -1, -1};
+            colNum = new int[] { 0, sideShift, 0, sideShift };
+        }
+        else {
+            int sideShift = target.getA().getX() - this.pos.getX(); // if the target is to the bottom, then this will be 1. if to the top, then -1
+            rowNum = new int[] { 0, sideShift, 0, sideShift };
+            colNum = new int[] { 1, 1, -1, -1};
+        }
+        Position pos = getRandomCell(rowNum, colNum);
 
+        Species partner = PlayField.getInstance().getCell(target.getA()).getIndividual();
+        partner.energy -= amountOfEnergyForReproduction;
+        this.energy -= amountOfEnergyForReproduction;
+        if (new Random().nextInt() % 2 == 0) {
+            if (this.getClass() == Predator.class)
+                builder.addPredator(pos, amountOfEnergyForReproduction * 2);
+            if (this.getClass() == Prey.class)
+                builder.addPrey(pos, amountOfEnergyForReproduction * 2);
+        }
     }
 
     public void dieFrom(Integer causeOfDeath) {

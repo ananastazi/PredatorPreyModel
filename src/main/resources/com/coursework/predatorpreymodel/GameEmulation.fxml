@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.*?>
-
-<AnchorPane fx:id="anchorPaneID" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@stylesheets/GridPane.css" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.coursework.predatorpreymodel.GameEmulation">
-   <children>
-   </children>
-</AnchorPane>

@@ -2,16 +2,33 @@ package com.coursework.predatorpreymodel;
 
 import com.coursework.predatorpreymodel.classes.*;
 import eu.hansolo.toolbox.tuples.Pair;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
+import org.controlsfx.control.spreadsheet.Grid;
 
+import java.io.IOException;
+import java.time.chrono.ThaiBuddhistEra;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,68 +36,223 @@ import java.util.List;
 import static java.lang.Math.min;
 
 public class GameEmulation {
-    public AnchorPane anchorPane;
     private Scene scene;
     private Stage stage;
+    // region Nodes connected fields
+    public AnchorPane anchorPane; double windowWidth = 1280.0, windowHeight = 800.0;
     private GridPane gridPane; private double gridPaneSize;
-    // 0 - ground; 1 - grass;
+    AnchorPane rightPanel;
+    private Button pauseButton;
+    private Button homeButton;
+    private Slider speedSlider;
+    private DoubleProperty durationMultiplier = new SimpleDoubleProperty(1.0);
+    private Label tactLabel;
+
+    // endregion
+    private Timeline executionTimeline;
+    private PauseTransition pauseTransition;
+    // region lists of cells
     private final List<Image> cellsImg = new ArrayList<>(Arrays.asList(new Image("file:src/main/resources/media/ground.jpg"), new Image("file:src/main/resources/media/grassBlock.jpg"))); // Images "ground.png" and "grass.png"
     private List<List<ImageView>> cellsForForegroundImages;
-    // 0 - fox; 1 - rabbit;
+    // 0 - ground; 1 - grass;
     private final List<Image> speciesImg = new ArrayList<>(Arrays.asList(new Image("file:src/main/resources/media/fox.png"), new Image("file:src/main/resources/media/rabbit.png"))); // Images "fox.png" and "rabbit.png"
     private List<List<ImageView>> cellsForIndividuals; // predator/prey will be put inside
-    Emulation emulation;
+    // 0 - fox; 1 - rabbit;
+    // endregion
+    // region Emulation fields
     private final EmulationParameters emulationParameters = EmulationParameters.getInstance();
+    private Emulation emulation;
+    // endregion
+    private Integer currentTact;
 
-    public void GenerateEmulationSystem() {
+    public GameEmulation(Stage stage) {
+        this.stage = stage;
         this.emulation = new Emulation();
+        this.emulation.prepareEmulation();
+        generateScene();
+        prepareScene();
+        this.currentTact = 1;
     }
 
-    public void RunEmulation() {
-        this.emulation.prepareEmulation();
-        prepareScene();
-        PlayField.getInstance().printPlayField();
-        for (int i = 0; i < emulationParameters.getLifeTacts(); i++) {
-            emulation.performTact();
-            PlayField.getInstance().printPlayField();
-            updateScene(3000);
+    // region buttons onAction
+    public void openHomeScreen(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("HomeScreen.fxml"));
+        scene = new Scene(fxmlLoader.load(), 1280, 800);
+        scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm());
+
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void toggleButton() {
+        String btnName = pauseButton.getText();
+        switch (btnName) {
+            case "Start" -> {
+                executeNextTact();
+                pauseButton.setText("Pause");
+            }
+            case "Pause" -> {
+                executionTimeline.pause();
+                pauseTransition = new PauseTransition(Duration.seconds(0.2));
+                pauseTransition.setOnFinished(event -> {
+                    pauseButton.setText("Resume");
+                    pauseButton.setDisable(false);
+                });
+                pauseButton.setDisable(true);
+                pauseTransition.play(); // to prevent the user to accidentally click the button twice
+            }
+            case "Resume" -> {
+                executionTimeline.play();
+                pauseTransition.stop();
+                pauseButton.setText("Pause");
+            }
+            case "Restart" -> {
+                this.emulation = new Emulation();
+                this.emulation.prepareEmulation();
+                generateScene();
+                prepareScene();
+                this.currentTact = 1;
+                pauseButton.setText("Start");
+            }
         }
     }
+    // endregion
 
-    public void GenerateScene(Stage stage) {
-        this.stage = stage; // PROBABLY NOT NECESSARY
-        gridPane = new GridPane();
-// MUST BE CONNECTED TO EmulationParameters instance
-        Integer height = emulationParameters.getFieldHeight();
-        Integer width = emulationParameters.getFieldWidth();
-        gridPaneSize = min(900.0 / width, 800.0 / height);
+    private void executeNextTact() {
+        if (currentTact <= emulationParameters.getLifeTacts()) {
+            emulation.performTact();
+            Duration duration = Duration.seconds(0.01);
+            executionTimeline = new Timeline(new KeyFrame(duration, executionEvent -> {
+                if (currentTact > emulationParameters.getLifeTacts()) {
+                    System.out.println("IT QUITED THE EXECUTION TIMELINE WITH QueueOfChanges " + QueueOfChanges.getInstance().size());
+                    return;
+                }
+                if (!QueueOfChanges.getInstance().isEmpty()) {
+                    Duration updatingDuration = Duration.seconds(1).multiply(durationMultiplier.get());
+                    Timeline updatingTimeline = new Timeline(new KeyFrame(updatingDuration, updatingEvent -> {
+                        if (currentTact > emulationParameters.getLifeTacts()) {
+                            System.out.println("IT QUITED THE EXECUTION TIMELINE. ERROR upd");
+                            executionTimeline.stop();
+                            return;
+                        }
+                        if (pauseButton.getText() == "Pause" && (pauseTransition == null || pauseTransition.getStatus() != Animation.Status.RUNNING)) {// if the game is still on
+                            updateSceneOnce();
+                            executionTimeline.play();
+                        }
+                        else {
+                            System.out.println("UPDATING SCENE HAS NOT HAPPENED");
+                        }
+                    }));
+                    updatingTimeline.play(); // timeline to show one change (record) with duration automatically updated with the slider
+                    executionTimeline.pause(); // to continue after the updatingTimeline finish its work
+                } else {
+                    currentTact++;
+                    if (currentTact > emulationParameters.getLifeTacts()) {
+                        tactLabel.setText("Last tact: " + (currentTact - 1));
+                        pauseButton.setText("Restart");
+                        executionTimeline.stop();
+                        return;
+                    }
+                    if (true) { // if the autoplay is off
+                        toggleButton(); // Set pause the execution and make button "Resume"
+                    }
+                    tactLabel.setText("Tact: " + currentTact);
+                    executeNextTact();
+                }
+            }));
+            executionTimeline.setCycleCount(Animation.INDEFINITE);
+            executionTimeline.play();
+        }
+    }
+    private void generateScene() {
+        generateGridPane();
+        generateRightPanel();
 
-        gridPane.setLayoutY((800 - height * gridPaneSize) / 2);
-        gridPane.setStyle(
-                "-fx-grid-lines-visible: true; " +
-                        "-fx-border-color: white; " +
-                        "-fx-background-color: white;" +
-                        "-fx-background-image: url('media/ground.jpg')");
-
-        anchorPane = new AnchorPane();
+        anchorPane = new AnchorPane(generateContainer()); // the container is a grid with the field and the right panel of nodes.
         anchorPane.setBackground(Background.fill(Color.BLACK));
 
-        for (int i = 0; i < width; i++) {
-            ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPrefWidth(gridPaneSize);
-            gridPane.getColumnConstraints().add(colConst);
-        }
-        for (int j = 0; j < height; j++) {
-            RowConstraints rowConst = new RowConstraints();
-            rowConst.setPrefHeight(gridPaneSize);
-            gridPane.getRowConstraints().add(rowConst);
-        }
-
-        anchorPane.getChildren().add(gridPane);
-
         scene = new Scene(anchorPane, 1280, 800);
+        scene.getStylesheets().add(getClass().getResource("stylesheets/GameEmulation.css").toExternalForm());
+        scene.getStylesheets().add(getClass().getResource("stylesheets/root.css").toExternalForm()); // to import standard font
         this.stage.setScene(scene);
         this.stage.show();
+    }
+
+    private GridPane generateContainer() {
+        GridPane container = new GridPane();
+        container.getColumnConstraints().addAll(
+                new ColumnConstraints(min(windowWidth * 0.75, 900.0)),
+                new ColumnConstraints(windowWidth - min(windowWidth * 0.75, 900.0))
+        );
+
+        container.add(new AnchorPane(gridPane), 0, 0);
+        container.add(rightPanel, 1, 0);
+        return container;
+    }
+
+    private void generateGridPane() {
+        Integer height = emulation.getPlayField().getHeight();
+        Integer width = emulation.getPlayField().getWidth();
+        gridPaneSize = min(min(windowWidth * 0.75, 900.0) / width, windowHeight / height);
+
+        gridPane = new GridPane();
+        gridPane.setLayoutX((min(windowWidth * 0.75, 900.0) - width * gridPaneSize) / 2);
+        gridPane.setLayoutY((windowHeight - height * gridPaneSize) / 2);
+        gridPane.getStyleClass().add("playfield");
+
+        for (int i = 0; i < width; i++) {
+            gridPane.getColumnConstraints().add(new ColumnConstraints(gridPaneSize));
+        }
+        for (int j = 0; j < height; j++) {
+            gridPane.getRowConstraints().add(new RowConstraints(gridPaneSize));
+        }
+    }
+
+    private void generateRightPanel() {
+        pauseButton = new Button("Start");
+        pauseButton.setOnAction(e -> { toggleButton(); });
+        pauseButton.setPrefWidth(300);
+        pauseButton.setPrefHeight(80);
+        pauseButton.setLayoutX((windowWidth - min(windowWidth * 0.75, 900.0)) / 2 - 150);
+        pauseButton.setLayoutY(windowHeight * 0.6);
+        pauseButton.setCursor(Cursor.HAND);
+        pauseButton.getStyleClass().add("game-button");
+
+        homeButton = new Button("Home");
+        homeButton.setOnAction(e -> {
+            try {
+                openHomeScreen(e);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+        homeButton.setPrefWidth(300);
+        homeButton.setPrefHeight(80);
+        homeButton.setLayoutX((windowWidth - min(windowWidth * 0.75, 900.0)) / 2 - 150);
+        homeButton.setLayoutY(windowHeight * 0.6 + 100);
+        homeButton.setCursor(Cursor.HAND);
+        homeButton.getStyleClass().add("game-button");
+
+        speedSlider = new Slider(0.1, 3, 1);
+        speedSlider.setShowTickLabels(true);
+        speedSlider.setShowTickMarks(true);
+        speedSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            durationMultiplier.set(newValue.doubleValue());
+        });
+        speedSlider.setPrefWidth(300);
+        speedSlider.setLayoutX((windowWidth - min(windowWidth * 0.75, 900.0)) / 2 - 150);
+        speedSlider.setLayoutY(windowHeight * 0.6 - 100);
+        speedSlider.getStyleClass().add("speed-slider");
+
+        tactLabel = new Label("Cycle: 1");
+        tactLabel.setPrefWidth(300);
+        tactLabel.setTextAlignment(TextAlignment.CENTER);
+        tactLabel.setLayoutX((windowWidth - min(windowWidth * 0.75, 900.0)) / 2 - 150);
+        tactLabel.setLayoutY(windowHeight * 0.6 - 200);
+        tactLabel.getStyleClass().add("tact-label");
+
+        rightPanel = new AnchorPane(pauseButton, homeButton, speedSlider, tactLabel);
     }
 
     private void prepareScene() {
@@ -89,74 +261,58 @@ public class GameEmulation {
 
         this.cellsForForegroundImages = new ArrayList<>();
         this.cellsForIndividuals = new ArrayList<>();
-        for (int i = 0; i < PlayField.getInstance().getHeight(); ++i) {
+        for (int i = 0; i < emulation.getPlayField().getHeight(); ++i) {
             List<ImageView> innerList1 = new ArrayList<>();
             List<ImageView> innerList2 = new ArrayList<>();
-            for (int j = 0; j < PlayField.getInstance().getWidth(); ++j) {
-                ImageView groundView = new ImageView(cellsImg.get(0));
-                groundView.setFitWidth(gridPaneSize);
-                groundView.setFitHeight(gridPaneSize);
-                gridPane.add(groundView, i, j);
-                if (PlayField.getInstance().getField().get(i).get(j).getTypeOfCell() == 1)
-                    innerList1.add(new ImageView(cellsImg.get(1))); // setting grass
-                else
-                    innerList1.add(new ImageView()); // setting something else
-
+            for (int j = 0; j < emulation.getPlayField().getWidth(); ++j) {
+                switch (PlayField.getInstance().getField().get(i).get(j).getTypeOfCell()) {
+                    case 1:
+                        innerList1.add(new ImageView(cellsImg.get(1))); // setting grass
+                        break;
+                    default:
+                        innerList1.add(new ImageView()); // setting empty new imageView
+                        break;
+                }
                 innerList1.get(j).setFitWidth(gridPaneSize);
                 innerList1.get(j).setFitHeight(gridPaneSize);
-                gridPane.add(innerList1.get(j), i, j);
+                gridPane.add(innerList1.get(j), j, i); // adding to the gridPane
+                // must write j, i because: j - is the col; i - is the row;
 
-                innerList2.add(new ImageView());
+                innerList2.add(new ImageView()); // setting empty new imageView (will be refilled with individuals)
                 innerList2.get(j).setFitWidth(gridPaneSize);
                 innerList2.get(j).setFitHeight(gridPaneSize);
-                gridPane.add(innerList2.get(j), i, j);
+                gridPane.add(innerList2.get(j), j, i); // adding to the gridPane
+                // must write j, i because: j - is the col; i - is the row;
             }
             this.cellsForForegroundImages.add(innerList1);
             this.cellsForIndividuals.add(innerList2);
         }
-        updateScene(10000);
-    }
-
-    private void updateScene(Integer sleep) {
-        Timeline timer = new Timeline(
-                new KeyFrame(Duration.seconds(1000), event -> { System.out.println("finished"); })
-        );
-
-        int qSize = QueueOfChanges.getInstance().size();
-        for (int i = 0; i < qSize; i++) {
-//            timer.play();
-//            System.out.println("started");
+        while(!QueueOfChanges.getInstance().isEmpty())
             updateSceneOnce();
-        }
-        AlertBox.display("...");
     }
 
     private void updateSceneOnce() {
-        QueueOfChanges queueOfChanges = QueueOfChanges.getInstance();
-            Pair<Integer, Pair<Position, Position>> changePair = queueOfChanges.pop();
-//            System.out.println(changePair.getA()
-//                    + " " + changePair.getB().getA().getX() + " " + changePair.getB().getA().getY() + ";"
-//                    + " " + changePair.getB().getB().getX() + " " + changePair.getB().getB().getY());
-            if (changePair.getA() == 0) {
-                if (changePair.getB().getA() != null)
-                    cellsForForegroundImages.get(changePair.getB().getA().getX()).get(changePair.getB().getA().getY()).setOpacity(0);
-                if (changePair.getB().getB() != null) {
-                    if (PlayField.getInstance().getCell(changePair.getB().getB()).getTypeOfCell() == 0)
-                        cellsForForegroundImages.get(changePair.getB().getB().getX()).get(changePair.getB().getB().getY()).setOpacity(0);
-                    if (PlayField.getInstance().getCell(changePair.getB().getB()).getTypeOfCell() == 1)
-                        cellsForForegroundImages.get(changePair.getB().getB().getX()).get(changePair.getB().getB().getY()).setOpacity(1);
-                }
+        Pair<Integer, Pair<Position, Position>> recordOfChange = QueueOfChanges.getInstance().pop();
+        if (recordOfChange.getA() == 0) {
+            if (recordOfChange.getB().getA() != null)
+                cellsForForegroundImages.get(recordOfChange.getB().getA().getX()).get(recordOfChange.getB().getA().getY()).setOpacity(0);
+            if (recordOfChange.getB().getB() != null) {
+                if (PlayField.getInstance().getCell(recordOfChange.getB().getB()).getTypeOfCell() == 0)
+                    cellsForForegroundImages.get(recordOfChange.getB().getB().getX()).get(recordOfChange.getB().getB().getY()).setOpacity(0);
+                if (PlayField.getInstance().getCell(recordOfChange.getB().getB()).getTypeOfCell() == 1)
+                    cellsForForegroundImages.get(recordOfChange.getB().getB().getX()).get(recordOfChange.getB().getB().getY()).setOpacity(1);
             }
-            if (changePair.getA() == 1) {
-                if (changePair.getB().getA() != null)
-                    cellsForIndividuals.get(changePair.getB().getA().getX()).get(changePair.getB().getA().getY()).setImage(null);
-                if (changePair.getB().getB() != null && PlayField.getInstance().getCell(changePair.getB().getB()).getIndividual() != null) {
-                    Image image = null;
-                    if (PlayField.getInstance().getCell(changePair.getB().getB()).getIndividual().getClass() == Predator.class)
-                        image = speciesImg.get(0);
-                    if (PlayField.getInstance().getCell(changePair.getB().getB()).getIndividual().getClass() == Prey.class)
-                        image = speciesImg.get(1);
-                    cellsForIndividuals.get(changePair.getB().getB().getX()).get(changePair.getB().getB().getY()).setImage(image);
+        }
+        if (recordOfChange.getA() == 1) {
+            if (recordOfChange.getB().getA() != null)
+                cellsForIndividuals.get(recordOfChange.getB().getA().getX()).get(recordOfChange.getB().getA().getY()).setImage(null);
+            if (recordOfChange.getB().getB() != null && PlayField.getInstance().getCell(recordOfChange.getB().getB()).getIndividual() != null) {
+                Image image = null;
+                if (PlayField.getInstance().getCell(recordOfChange.getB().getB()).getIndividual().getClass() == Predator.class)
+                    image = speciesImg.get(0);
+                if (PlayField.getInstance().getCell(recordOfChange.getB().getB()).getIndividual().getClass() == Prey.class)
+                    image = speciesImg.get(1);
+                cellsForIndividuals.get(recordOfChange.getB().getB().getX()).get(recordOfChange.getB().getB().getY()).setImage(image);
             }
         }
     }

@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Emulation {
+public class Emulation implements Builder {
     private PlayField playField = PlayField.getInstance();
     private List<Predator> predators;
     private List<Prey> preys;
@@ -27,16 +27,39 @@ public class Emulation {
         individualsFieldPlacing();
     }
 
+
+    @Override
+    public void addGrass(Position pos) {
+        Grass grass = new Grass(pos, UniqueIdGenerator.getInstance().getNewUniqueId());
+        this.grass.add(grass);
+        playField.getField().get(pos.getX()).get(pos.getY()).setTypeOfCell(1);
+        playField.getField().get(pos.getX()).get(pos.getY()).setGrass(grass);
+        QueueOfChanges.getInstance().add(new Pair<>(0, new Pair<>(null, pos))); // adding change to the queue
+    }
+
+    @Override
+    public void addPredator(Position pos, Integer energy) {
+        Predator predator = new Predator(this, UniqueIdGenerator.getInstance().getNewUniqueId(), pos, emulationParameters.getPredatorsCriticalEnergy(), energy, emulationParameters.getPredatorsMaxEnergy(), emulationParameters.getPredatorsLifespan(), emulationParameters.getPredatorsSearchRadius());
+        predators.add(predator);
+        playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(predator); // adjusting the field
+        QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(null, pos))); // adding change to the queue
+    }
+
+    @Override
+    public void addPrey(Position pos, Integer energy) {
+        Prey prey = new Prey(this, UniqueIdGenerator.getInstance().getNewUniqueId(), pos, emulationParameters.getPreysCriticalEnergy(), energy, emulationParameters.getPreysMaxEnergy(), emulationParameters.getPreysLifespan(), emulationParameters.getPreysSearchRadius());
+        preys.add(prey);
+        playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(prey); // adjusting the field
+        QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(null, pos))); // adding change to the queue
+    }
+
     void cellsFieldPlacing() {
         UniquePositionGenerator uniquePositionGenerator = new UniquePositionGenerator(emulationParameters.getFieldHeight(), emulationParameters.getFieldWidth());
         Position pos;
         this.grass = new ArrayList<>();
         for (int i = 0; i < emulationParameters.getNumberOfGrass(); ++i) {
             pos = uniquePositionGenerator.GetNewPos();
-            grass.add(new Grass(pos, UniqueIdGenerator.getInstance().getNewUniqueId()));
-            playField.getField().get(pos.getX()).get(pos.getY()).setTypeOfCell(1);
-            playField.getField().get(pos.getX()).get(pos.getY()).setGrass(grass.get(grass.size() - 1));
-            QueueOfChanges.getInstance().add(new Pair<>(0, new Pair<>(null, pos))); // adding change to the queue
+            addGrass(pos);
         }
     }
     void individualsFieldPlacing() {
@@ -46,15 +69,11 @@ public class Emulation {
         preys = new ArrayList<>();
         for (int i = 0; i < emulationParameters.getNumberOfPredators(); ++i) {
             pos = uniquePositionGenerator.GetNewPos();
-            predators.add(new Predator(UniqueIdGenerator.getInstance().getNewUniqueId(), pos, emulationParameters.getPredatorsEnergy(), emulationParameters.getPredatorsCriticalEnergy(), emulationParameters.getPredatorsLifespan(), emulationParameters.getPredatorsSearchRadius()));
-            playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(predators.get(predators.size() - 1)); // adjusting the field
-            QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(null, pos))); // adding change to the queue
+            addPredator(pos, emulationParameters.getPredatorsEnergy());
         }
         for (int i = 0; i < emulationParameters.getNumberOfPreys(); ++i) {
             pos = uniquePositionGenerator.GetNewPos();
-            preys.add(new Prey(UniqueIdGenerator.getInstance().getNewUniqueId(), pos, emulationParameters.getPreysEnergy(), emulationParameters.getPreysCriticalEnergy(), emulationParameters.getPreysLifespan(), emulationParameters.getPreysSearchRadius()));
-            playField.getField().get(pos.getX()).get(pos.getY()).setIndividual(preys.get(preys.size() - 1)); // adjusting the field
-            QueueOfChanges.getInstance().add(new Pair<>(1, new Pair<>(null, pos))); // adding change to the queue
+            addPrey(pos, emulationParameters.getPreysEnergy());
         }
     }
 
@@ -62,9 +81,16 @@ public class Emulation {
         System.out.println("Predators alive: " + getPredatorsAlive());
         System.out.println("Preys alive: " + getPreysAlive());
         System.out.println();
-        for (Predator predator : predators) {
-            predator.act();
+        QueueOfChanges.getInstance().add(new Pair<>(-1, new Pair<>(null, null))); // creating a null record to differentiate a new tact from the empty queue due to absence of the changes
+//        for (Predator predator : predators) {
+//            predator.act();
+//        }
+        if (predators.size() > 0) {
+            predators.get(predators.size() - 1).act();
+            System.out.println("GOOD");
         }
+        else
+            System.out.println("STRANGE");
         for (Prey prey : preys) {
             prey.act();
         }
@@ -73,7 +99,7 @@ public class Emulation {
         }
     }
 
-    public Integer getPredatorsAlive() {
+    private Integer getPredatorsAlive() {
         Integer res = 0;
         for (Predator predator : predators) {
             if (predator.state)
@@ -82,7 +108,7 @@ public class Emulation {
         return res;
     }
 
-    public Integer getPreysAlive() {
+    private Integer getPreysAlive() {
         Integer res = 0;
         for (Prey prey : preys) {
             if (prey.state)
@@ -91,6 +117,7 @@ public class Emulation {
         return res;
     }
 
+// three getters are not used !!!!!
     // region Getters/Setters
     public PlayField getPlayField() {
         return playField;

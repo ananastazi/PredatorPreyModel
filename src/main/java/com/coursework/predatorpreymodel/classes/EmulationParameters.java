@@ -35,7 +35,7 @@ public class EmulationParameters {
         this.numberOfPredators = setNumber(numberOfPredators, numberOfIndividuals / 4);
         this.predatorsCriticalEnergy = setNumber(predatorsCriticalEnergy, 2);
         this.predatorsMaxEnergy = setNumber(predatorsMaxEnergy, this.predatorsCriticalEnergy + 10);
-        this.predatorsEnergy = this.predatorsCriticalEnergy + min(10, (this.predatorsMaxEnergy - this.predatorsCriticalEnergy) / 2);
+        this.predatorsEnergy = this.predatorsCriticalEnergy + min(6, (this.predatorsMaxEnergy - this.predatorsCriticalEnergy) / 2);
         this.predatorsLifespan = setNumber(predatorsLifespan, 7);
         this.numberOfPreys = setNumber(numberOfPreys, max(this.numberOfPredators * 2, numberOfIndividuals / 2));
         this.preysCriticalEnergy = setNumber(preysCriticalEnergy, 2);

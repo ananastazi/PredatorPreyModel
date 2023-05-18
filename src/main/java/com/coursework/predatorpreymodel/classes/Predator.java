@@ -11,14 +11,14 @@ import java.util.Queue;
 public class Predator extends Species {
     private Integer amountOfEnergyForPrey;
 
-    public Predator(Integer id, Position pos, Integer energy, Integer criticalEnergy, Integer lifetimeTacts, Integer searchRadius) {
-        super(id, pos, energy, criticalEnergy, lifetimeTacts, searchRadius);
+    public Predator(Builder builder, Integer id, Position pos, Integer criticalEnergy,Integer energy, Integer maxEnergy, Integer lifetimeTacts, Integer searchRadius) {
+        super(builder, id, pos, criticalEnergy, energy, maxEnergy, lifetimeTacts, searchRadius);
         this.amountOfEnergyForPrey = 5;
     }
 
     @Override
     // Probably going to move in diagonal
-    public  void move() {
+    public void move() {
         if (this.workaround != null && this.workaround.size() > 1) {
             Position nextPos = this.workaround.get(this.workaround.size() - 2);
             Cell nextCell = PlayField.getInstance().getField().get(nextPos.getX()).get(nextPos.getY());

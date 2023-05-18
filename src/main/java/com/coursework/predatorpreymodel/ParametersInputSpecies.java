@@ -72,13 +72,9 @@ public class ParametersInputSpecies {
             return;
         }
 
-        GameEmulation gameEmulation = new GameEmulation();
-
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        gameEmulation.GenerateEmulationSystem();
-        gameEmulation.GenerateScene(stage);
-        gameEmulation.RunEmulation();
+        GameEmulation gameEmulation = new GameEmulation(stage);
     }
 
     private String UpdateEmulationParameters() {

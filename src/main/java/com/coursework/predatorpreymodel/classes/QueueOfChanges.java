@@ -1,6 +1,7 @@
 package com.coursework.predatorpreymodel.classes;
 
 import eu.hansolo.toolbox.tuples.Pair;
+import javafx.beans.binding.BooleanExpression;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -22,6 +23,7 @@ public class QueueOfChanges { // collects changes to individuals
         return single_instance;
     }
     public Integer size() { return queue.size(); }
+    public Boolean isEmpty() { return size() == 0; }
     public void add(Pair<Integer, Pair<Position, Position>> newElement) {
         queue.add(newElement);
     }
