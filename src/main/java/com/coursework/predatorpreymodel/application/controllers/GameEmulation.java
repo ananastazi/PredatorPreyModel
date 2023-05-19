@@ -3,7 +3,7 @@ package com.coursework.predatorpreymodel.application.controllers;
 import com.coursework.predatorpreymodel.infrastructure.Emulation;
 import com.coursework.predatorpreymodel.infrastructure.PlayField;
 import com.coursework.predatorpreymodel.infrastructure.QueueOfChanges;
-import com.coursework.predatorpreymodel.domain.cell.Position;
+import com.coursework.predatorpreymodel.utils.Position;
 import com.coursework.predatorpreymodel.domain.individuals.Predator;
 import com.coursework.predatorpreymodel.domain.individuals.Prey;
 import com.coursework.predatorpreymodel.parameters.EmulationParameters;
@@ -140,9 +140,6 @@ public class GameEmulation {
                         if (pauseButton.getText() == "Pause" && (pauseTransition == null || pauseTransition.getStatus() != Animation.Status.RUNNING)) {// if the game is still on
                             updateSceneOnce();
                             executionTimeline.play();
-                        }
-                        else {
-                            System.out.println("UPDATING SCENE HAS NOT HAPPENED");
                         }
                     }));
                     updatingTimeline.play(); // timeline to show one change (record) with duration automatically updated with the slider

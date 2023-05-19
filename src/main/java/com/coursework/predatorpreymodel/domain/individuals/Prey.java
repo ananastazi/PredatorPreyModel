@@ -3,7 +3,7 @@ package com.coursework.predatorpreymodel.domain.individuals;
 import com.coursework.predatorpreymodel.infrastructure.PlayField;
 import com.coursework.predatorpreymodel.domain.cell.Cell;
 import com.coursework.predatorpreymodel.domain.interfaces.Builder;
-import com.coursework.predatorpreymodel.domain.cell.Position;
+import com.coursework.predatorpreymodel.utils.Position;
 import eu.hansolo.toolbox.tuples.Pair;
 
 public class Prey extends Species {

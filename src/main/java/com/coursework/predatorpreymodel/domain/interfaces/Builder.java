@@ -1,6 +1,6 @@
 package com.coursework.predatorpreymodel.domain.interfaces;
 
-import com.coursework.predatorpreymodel.domain.cell.Position;
+import com.coursework.predatorpreymodel.utils.Position;
 
 public interface Builder {
     public void addGrass(Position pos);

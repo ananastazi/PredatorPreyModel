@@ -5,7 +5,7 @@ import com.coursework.predatorpreymodel.infrastructure.QueueOfChanges;
 import com.coursework.predatorpreymodel.domain.cell.Cell;
 import com.coursework.predatorpreymodel.domain.interfaces.Builder;
 import com.coursework.predatorpreymodel.application.dialogs.AlertBox;
-import com.coursework.predatorpreymodel.domain.cell.Position;
+import com.coursework.predatorpreymodel.utils.Position;
 import eu.hansolo.toolbox.tuples.Pair;
 
 public class Predator extends Species {

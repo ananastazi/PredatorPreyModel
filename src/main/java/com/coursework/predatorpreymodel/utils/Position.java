@@ -1,4 +1,4 @@
-package com.coursework.predatorpreymodel.domain.cell;
+package com.coursework.predatorpreymodel.utils;
 
 import static java.lang.Math.abs;
 

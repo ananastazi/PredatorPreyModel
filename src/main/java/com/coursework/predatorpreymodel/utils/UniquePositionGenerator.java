@@ -1,7 +1,5 @@
 package com.coursework.predatorpreymodel.utils;
 
-import com.coursework.predatorpreymodel.domain.cell.Position;
-
 import java.util.Random;
 
 import static java.lang.Math.max;

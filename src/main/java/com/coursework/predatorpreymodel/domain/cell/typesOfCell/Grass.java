@@ -2,7 +2,7 @@ package com.coursework.predatorpreymodel.domain.cell.typesOfCell;
 
 import com.coursework.predatorpreymodel.infrastructure.PlayField;
 import com.coursework.predatorpreymodel.infrastructure.QueueOfChanges;
-import com.coursework.predatorpreymodel.domain.cell.Position;
+import com.coursework.predatorpreymodel.utils.Position;
 import eu.hansolo.toolbox.tuples.Pair;
 
 import java.util.Random;

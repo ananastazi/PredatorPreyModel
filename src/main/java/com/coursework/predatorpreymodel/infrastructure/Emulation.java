@@ -5,7 +5,7 @@ import com.coursework.predatorpreymodel.utils.UniquePositionGenerator;
 import com.coursework.predatorpreymodel.domain.interfaces.Builder;
 import com.coursework.predatorpreymodel.parameters.EmulationParameters;
 import com.coursework.predatorpreymodel.domain.cell.typesOfCell.Grass;
-import com.coursework.predatorpreymodel.domain.cell.Position;
+import com.coursework.predatorpreymodel.utils.Position;
 import com.coursework.predatorpreymodel.domain.individuals.Predator;
 import com.coursework.predatorpreymodel.domain.individuals.Prey;
 import eu.hansolo.toolbox.tuples.Pair;

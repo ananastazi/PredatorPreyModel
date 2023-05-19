@@ -1,7 +1,7 @@
 package com.coursework.predatorpreymodel.infrastructure;
 
 import com.coursework.predatorpreymodel.domain.cell.Cell;
-import com.coursework.predatorpreymodel.domain.cell.Position;
+import com.coursework.predatorpreymodel.utils.Position;
 import com.coursework.predatorpreymodel.domain.individuals.Predator;
 import com.coursework.predatorpreymodel.domain.individuals.Prey;
 

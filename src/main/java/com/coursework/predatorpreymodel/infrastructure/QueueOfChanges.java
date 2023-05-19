@@ -1,6 +1,6 @@
 package com.coursework.predatorpreymodel.infrastructure;
 
-import com.coursework.predatorpreymodel.domain.cell.Position;
+import com.coursework.predatorpreymodel.utils.Position;
 import eu.hansolo.toolbox.tuples.Pair;
 
 import java.util.LinkedList;
