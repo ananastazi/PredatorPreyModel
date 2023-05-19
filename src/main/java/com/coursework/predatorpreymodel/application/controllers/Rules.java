@@ -1,0 +1,45 @@
+package com.coursework.predatorpreymodel.application.controllers;
+
+import com.coursework.predatorpreymodel.application.controllers.parametersInput.ParametersInputField;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
+public class Rules {
+    private Stage stage;
+    private Scene scene;
+
+    public Button backButton, startButton, exitButton;
+
+    public void Back(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/HomeScreen.fxml"));
+        scene = new Scene(fxmlLoader.load(), 1280, 800);
+
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void Start(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/views/ParametersInputField.fxml"));
+        scene = new Scene(fxmlLoader.load(), 1280, 800);
+        scene.getStylesheets().add(getClass().getResource("/stylesheets/root.css").toExternalForm());
+
+        ParametersInputField parametersInputField = fxmlLoader.getController();
+        parametersInputField.initializeTextFields();
+
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void Exit(ActionEvent actionEvent) {
+        stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        stage.close();
+    }
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="scene1ID" prefHeight="800.0" prefWidth="1280.0" stylesheets="@../stylesheets/HomeScreen.css" xmlns:fx="http://javafx.com/fxml" fx:controller="com.coursework.predatorpreymodel.application.controllers.HomeScreen">
+   <children>
+         <Pane prefHeight="768.0" prefWidth="1024.0" />
+         <ImageView fitHeight="802.0" fitWidth="1280.0">
+            <image>
+               <Image url="@../media/GrassMain.jpg" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="foxInGrassID" fitHeight="275.0" fitWidth="279.0" layoutY="105.0">
+            <image>
+               <Image url="@../media/Group 3.png" />
+            </image>
+         </ImageView>
+         <ImageView fx:id="rabbitInGrassID" fitHeight="237.0" fitWidth="260.0" layoutX="906.0" layoutY="565.0">
+            <image>
+               <Image url="@../media/Group 2.png" />
+            </image>
+         </ImageView>
+         <Label fx:id="predatorVSpreyLabel" contentDisplay="CENTER" layoutX="411.0" layoutY="96.0" prefHeight="141.0" prefWidth="506.0" styleClass="predator-vs-prey" text="Predator">
+            Predator vs Prey
+         </Label>
+         <Button fx:id="playButton" layoutX="530.0" layoutY="453.0" mnemonicParsing="false" onAction="#Play" styleClass="home-buttons">
+            Play
+         </Button>
+         <Button fx:id="rulesButton" layoutX="530.0" layoutY="555.0" mnemonicParsing="false" onAction="#Rules" styleClass="home-buttons">
+            Rules
+         </Button>
+         <Button fx:id="exitButton" layoutX="530.0" layoutY="658.0" mnemonicParsing="false" onAction="#Exit" prefHeight="89.0" styleClass="home-buttons">
+            Exit
+         </Button>
+      <Label fx:id="predatorVSpreyLabel1" contentDisplay="CENTER" layoutX="597.0" layoutY="188.0" prefHeight="65.0" prefWidth="135.0" styleClass="predator-vs-prey" text="vs" />
+      <Label fx:id="predatorVSpreyLabel11" contentDisplay="CENTER" layoutX="536.0" layoutY="278.0" prefHeight="138.0" prefWidth="254.0" styleClass="predator-vs-prey" text="Prey" />
+      <ImageView fitHeight="74.0" fitWidth="74.0" layoutX="203.0" layoutY="670.0">
+         <image>
+            <Image url="@../media/mouse.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="164.0" fitWidth="200.0" layoutX="140.0" layoutY="638.0">
+         <image>
+            <Image url="@../media/grass.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="227.0" fitWidth="184.0" layoutX="1024.0" layoutY="14.0" rotate="180.0">
+         <image>
+            <Image url="@../media/wolf.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="244.0" layoutX="1005.0" layoutY="0.0" rotate="180.0">
+         <image>
+            <Image url="@../media/grass.png" />
+         </image>
+      </ImageView>
+      </children>
+</AnchorPane>

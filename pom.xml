@@ -118,7 +118,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.coursework.predatorpreymodel/com.coursework.predatorpreymodel.Main
+                                com.coursework.predatorpreymodel/com.coursework.predatorpreymodel.application.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
