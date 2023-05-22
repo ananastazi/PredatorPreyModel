@@ -19,7 +19,7 @@ public abstract class Species {
     protected Integer criticalEnergy;
     protected Integer energy;
     protected Integer maxEnergy;
-    protected Integer amountOfEnergyForReproduction = 6;
+    protected Integer amountOfEnergyForReproduction; //was 6
     protected Integer amountOfEnergyForMovement = 1;
     protected Integer lifetimeTacts;
     protected Boolean state = true;
@@ -36,6 +36,7 @@ public abstract class Species {
         this.energy = energy;
         this.lifetimeTacts = lifetimeTacts;
         this.searchRadius = searchRadius;
+        this.amountOfEnergyForReproduction = criticalEnergy + 1;
     }
 
     // region Getters/Setters
@@ -108,7 +109,8 @@ public abstract class Species {
     public void act() {
         if (!state)
             return;
-        if (this.currentAge > this.lifetimeTacts) {
+        int prob = new  Random().nextInt();
+        if ((this.currentAge >= this.lifetimeTacts - 1) && (prob % (this.lifetimeTacts + 2 - this.currentAge) == 0)) {
             this.dieFrom(0);
             return;
         }
@@ -116,7 +118,7 @@ public abstract class Species {
             this.dieFrom(1);
             return;
         }
-        else if (this.energy < this.amountOfEnergyForReproduction) {
+        else if (this.currentAge < 3 || this.energy < this.amountOfEnergyForReproduction) {
             this.typeOfTarget = 0;
         }
         else if (this.energy < this.maxEnergy) {
@@ -267,7 +269,12 @@ public abstract class Species {
         Species partner = PlayField.getInstance().getCell(target.getA()).getIndividual();
         partner.energy -= amountOfEnergyForReproduction;
         this.energy -= amountOfEnergyForReproduction;
-        if (new Random().nextInt() % 2 == 0) {
+        //if there is no position around
+        if (pos == null)
+            return;
+
+        double birthProbability = new Random().nextDouble();
+        if (birthProbability < 0.75) {
             if (this.getClass() == Predator.class)
                 builder.addPredator(pos, amountOfEnergyForReproduction * 2);
             if (this.getClass() == Prey.class)

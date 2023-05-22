@@ -148,6 +148,8 @@ public class GameEmulation {
                     currentTact++;
                     if (currentTact > emulationParameters.getLifeTacts()) {
                         tactLabel.setText("Last tact: " + (currentTact - 1));
+                        System.out.println(emulation.getPredatorsAlive());
+                        System.out.println(emulation.getPreysAlive());
                         pauseButton.setText("Restart");
                         executionTimeline.stop();
                         return;
@@ -232,7 +234,7 @@ public class GameEmulation {
         homeButton.setCursor(Cursor.HAND);
         homeButton.getStyleClass().add("game-button");
 
-        speedSlider = new Slider(0.1, 3, 1);
+        speedSlider = new Slider(0.01, 3, 1);
         speedSlider.setShowTickLabels(true);
         speedSlider.setShowTickMarks(true);
         speedSlider.valueProperty().addListener((observable, oldValue, newValue) -> {

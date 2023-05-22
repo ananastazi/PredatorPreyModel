@@ -97,7 +97,7 @@ public class Emulation implements Builder {
     }
 
     // probably for the statistics
-    private Integer getPreysAlive() {
+    public Integer getPreysAlive() {
         Integer res = 0;
         for (Prey prey : preys) {
             if (prey.getState())
@@ -107,7 +107,7 @@ public class Emulation implements Builder {
     }
 
     // probably for the statistics
-    private Integer getPredatorsAlive() {
+    public Integer getPredatorsAlive() {
         Integer res = 0;
         for (Predator predator : predators) {
             if (predator.getState())

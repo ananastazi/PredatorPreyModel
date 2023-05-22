@@ -10,7 +10,7 @@ public class Prey extends Species {
     protected Integer amountOfEnergyForGrass;
     public Prey(Builder builder, Integer id, Position pos, Integer criticalEnergy, Integer energy, Integer maxEnergy, Integer lifetimeTacts, Integer searchRadius) {
         super(builder, id, pos, criticalEnergy, energy, maxEnergy, lifetimeTacts, searchRadius);
-        this.amountOfEnergyForGrass = 3;
+        this.amountOfEnergyForGrass = 6;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Prey extends Species {
                     && individual.energy - individual.amountOfEnergyForMovement * ((distance + 1) / 2) >= individual.amountOfEnergyForReproduction) // if the amount of energy is sufficient
                 return new Pair<>(1, individual.getId());
         }
-        if (typeOfTarget == 0 || typeOfTarget == 1 && cell.getGrass() != null) { // if the target is grass
+        if ((typeOfTarget == 0 || typeOfTarget == 1) && cell.getGrass() != null) { // if the target is grass
             if (cell.getTypeOfCell() == 1 && this.lifetimeTacts - this.currentAge >= distance // if the prey can get to the grass in the best-case scenario
                     && this.energy - this.amountOfEnergyForMovement * distance >= this.criticalEnergy) // if the hunter can reach the partner in the best-case scenario
                 return new Pair<>(1, cell.getGrass().getId());
