@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -59,6 +60,7 @@ public class GameEmulation {
     // 0 - ground; 1 - grass;
     private final List<Image> speciesImg = new ArrayList<>(Arrays.asList(new Image("file:src/main/resources/media/fox.png"), new Image("file:src/main/resources/media/rabbit.png"))); // Images "fox.png" and "rabbit.png"
     private List<List<ImageView>> cellsForIndividuals; // predator/prey will be put inside
+    private List<List<Rectangle>> cellsForEnergyRectangles;
     // 0 - fox; 1 - rabbit;
     // endregion
     // region Emulation fields
@@ -264,6 +266,7 @@ public class GameEmulation {
         for (int i = 0; i < emulation.getPlayField().getHeight(); ++i) {
             List<ImageView> innerList1 = new ArrayList<>();
             List<ImageView> innerList2 = new ArrayList<>();
+            List<ImageView> innerList3 = new ArrayList<>();
             for (int j = 0; j < emulation.getPlayField().getWidth(); ++j) {
                 switch (PlayField.getInstance().getField().get(i).get(j).getTypeOfCell()) {
                     case 1:
@@ -283,6 +286,12 @@ public class GameEmulation {
                 innerList2.get(j).setFitHeight(gridPaneSize);
                 gridPane.add(innerList2.get(j), j, i); // adding to the gridPane
                 // must write j, i because: j - is the col; i - is the row;
+
+//                innerList3.add(new Rectangle());
+//                Rectangle rect = new Rectangle(percentage * width, 0, (1 - percentage) * width, 30);
+//                rect.setFill(Color.WHITE);
+//                rect.setStroke(Color.rgb(1,1,1,0.88));
+//                rect.setStrokeWidth(0.88);
             }
             this.cellsForForegroundImages.add(innerList1);
             this.cellsForIndividuals.add(innerList2);

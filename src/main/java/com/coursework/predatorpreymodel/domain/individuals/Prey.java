@@ -48,14 +48,13 @@ public class Prey extends Species {
     protected Pair<Integer, Integer> CheckCell(Position pos, Integer distance) {
         Cell cell = PlayField.getInstance().getField().get(pos.getX()).get(pos.getY());
         Species individual = cell.getIndividual();
-        if (individual == null)
-            return new Pair<>(0, null);
 
-        if ((typeOfTarget == 1 || typeOfTarget == 2) && individual.getClass() == Prey.class && !this.equals(individual)) { // if the target is a partner
+        if ((typeOfTarget == 1 || typeOfTarget == 2) && individual != null && individual.getClass() == Prey.class && !this.equals(individual)) { // if the target is a partner
             // (distance + 1) / 2 - is used because 7 / 2 = 3, but you will need 4 steps to get to the target
             if (this.lifetimeTacts - this.currentAge >= (distance + 1) / 2 // if the hunter can get to the target in the best-case scenario
                     && this.energy - this.amountOfEnergyForMovement * ((distance + 1) / 2) >= this.amountOfEnergyForReproduction // if the amount of energy is sufficient
                     && this.energy - this.amountOfEnergyForMovement * (distance + 1) / 2 >= this.criticalEnergy // if the hunter can reach the partner in the best-case scenario
+                    && individual.currentAge >= 3 // to check whether the individual is eligible to create offspring
                     && individual.energy - individual.amountOfEnergyForMovement * (distance + 1) / 2 >= individual.criticalEnergy // if the target can reach the partner in the best-case scenario
                     && individual.energy - individual.amountOfEnergyForMovement * ((distance + 1) / 2) >= individual.amountOfEnergyForReproduction) // if the amount of energy is sufficient
                 return new Pair<>(1, individual.getId());
@@ -65,7 +64,9 @@ public class Prey extends Species {
                     && this.energy - this.amountOfEnergyForMovement * distance >= this.criticalEnergy) // if the hunter can reach the partner in the best-case scenario
                 return new Pair<>(1, cell.getGrass().getId());
         }
-        return new Pair<>(-1, null);
+        if (individual == null)
+            return new Pair<>(0, null); // the cell is empty
+        return new Pair<>(-1, null); // the cell is filled
     }
 
     public void eatGrass() {
